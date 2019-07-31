@@ -74,15 +74,21 @@ Three Mongo collections are created.
 ## Variables
 There is a node named 'Variables' that sets all the variables used. Eventually, I will move this into a settings page. There is a read me that describes variable usage. 
 
-```This sets all variables that would otherwise be 
+```
+This sets all variables that would otherwise be 
 hard-coded into global/flow for use.
 
-passcode - the number that unlocks with the pin pad (global)
+use_keypad - (boolean) true uses the keypad, false does not.
+
+passcode_value - the number that unlocks with the pin pad (global)
+
+passcode_timeout - number of seconds until passcode is required.
 
 lock_node_id - the node_id of the door lock in question
 
-code_length - a number between 4 and whatever for codes.
+code_length - a number between 4 and whatever that corresponds to the length of the code.
 **For Schlage, all codes have to be the same length.**
+NOTE: This does not change the lock settings, only specifies what's accepted in the form.
 
 slot_offset - if there are slots that should never be touched, say slots 1-3, then enter a slot_offset
 value of 3. Default is 0.
@@ -90,38 +96,36 @@ value of 3. Default is 0.
 slot_offset_users - JSON array of users to handle the slot offsets. An example with 1 slot offset might be
 `[{"slot":0,"name":"Lock button"},{"slot":1,"name":"Family"}]`
 
-
-devices_for_home - array of entity_id to check for home/away.  [TODO]
+devices_for_home - array of entity_id to check for home/away. 
 Any device home is considered HOME. All devices aways is considered AWAY.
 
-notify_devices - JSON array of devices to send notifications to. [TODO]
+notify_devices - JSON array of devices to send notifications to.
 
-notify_on_lock - uses the notify device and sends a notification to that device when door is locked from the keypad. [TODO]
+notify_on_lock - uses the notify device and sends a notification to that device when door is locked from the keypad.
 
-notify_on_manual_lock - uses the notify device and sends a notification to that device when door is locked from the inside or with a key. [TODO]
+notify_on_manual_lock - uses the notify device and sends a notification to that device when door is locked from the inside or with a key.
 
-notify_on_unlock - uses the notify device and sends a notification to that device when door is unlocked from the keypad. [TODO]
+notify_on_unlock - uses the notify device and sends a notification to that device when door is unlocked from the keypad.
 
-notify_on_manual_unlock - uses the notify device and sends a notification to that device when door is unlocked from the inside or with a key. [TODO]
+notify_on_manual_unlock - uses the notify device and sends a notification to that device when door is unlocked from the inside or with a key.
 
-use_encryption - specifies whether or not to encrypt the codes in the db. [TODO]
+use_encryption - specifies whether or not to encrypt the codes in the db.
 
-disable_all_codes_when_asleep - clears all codes, except slot codes, while sleeping. [TODO]
+disable_all_codes_when_asleep - clears all codes, except slot codes, while sleeping. 
 
-use_clearcode - uses the lock.clear_usercode. This is **NOT** supported in Home Assistant without some work.
+use_clearcode - uses the lock.clear_usercode .This is **NOT** supported in Home Assistant without some work.
 If value is false then a random number will be used to overwrite codes.
 
-log_manual_lock - writes manual lock activities to log. [TODO]
+log_manual_lock - writes manual lock activities to log.
 
-log_manual_unlock - writes manual lock activities to log. [TODO]
+log_manual_unlock - writes manual lock activities to log.
 
-log_user_created - writes user creation activities to log.
-
-log_user_updated - writes user update activities to log.
-
-log_user_deleted - writes user deletion activities to log.
-
-log_scheduled_activity - writes any action taking based on a scheduled activity. Includes one-time use codes.
-
-keep_log_days - number of days to keep log data. Older data is removed.
+kkep_log_days - number of days to keep log data. Older data is removed.
 ```
+## Security
+Node-red UI is not secure by default. It can be secured in the settings **but** that means any requests to node-red are secured. I've got end-points setup for Oauth callbacks that I didn't want to secure. That leaves two options.
+
+1. Spin up another instance of node-red and secure the UI in that instance.
+2. Build some ghetto hack to secure the front end.
+
+I'm using the first option but I've included my *hack* which is a keypad that prevents usage until a code (defined in variables) is entered. The only problem with this is that it's server side which isn't terribly effective. There's a time-out (also defined in variables) that relocks the interface but anyone could access the interface during the period it's unlocked. I'm sure there's a better way of securing it.
