@@ -118,6 +118,7 @@ disable_all_codes_when_asleep - clears all codes, except slot codes, while sleep
 use_clearcode - uses the lock.clear_usercode.This is **NOT** supported in Home Assistant without some work. System will always overwrite
 codes with a random code but if this is true it will take the extra step of trying to clear the lock slot.
 
+STILL IN PROGRESS
 log_manual_lock - writes manual lock activities to log.
 
 log_manual_unlock - writes manual lock activities to log.
