@@ -278,6 +278,195 @@
         "env": []
     },
     {
+        "id": "56145c0c.026bc4",
+        "type": "subflow",
+        "name": "Convert to array",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 50,
+                "y": 40,
+                "wires": [
+                    {
+                        "id": "2120cd5d.5d5672"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 450,
+                "y": 40,
+                "wires": [
+                    {
+                        "id": "2120cd5d.5d5672",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": []
+    },
+    {
+        "id": "cd3e33e6.2da5b",
+        "type": "subflow",
+        "name": "Get Users",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "c9749e4f.153b7"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1480,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "95340430.79a298",
+                        "port": 0
+                    },
+                    {
+                        "id": "f6e8edc7.e28f",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": []
+    },
+    {
+        "id": "3f31c381.f34b6c",
+        "type": "subflow",
+        "name": "Code Exists?",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 40,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "49a9c0a4.0b32a"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 420,
+                "y": 40,
+                "wires": [
+                    {
+                        "id": "3003d25.68d252e",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 420,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "3003d25.68d252e",
+                        "port": 1
+                    }
+                ]
+            }
+        ],
+        "env": []
+    },
+    {
+        "id": "b8e924ca.5a2238",
+        "type": "subflow",
+        "name": "Name Exists?",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "3abab958.832826"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 580,
+                "y": 60,
+                "wires": [
+                    {
+                        "id": "3d6a34bf.abdfdc",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 580,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "3d6a34bf.abdfdc",
+                        "port": 1
+                    }
+                ]
+            }
+        ],
+        "env": []
+    },
+    {
+        "id": "7a1645fc.9c114c",
+        "type": "subflow",
+        "name": "Upsert User",
+        "info": "",
+        "category": "",
+        "in": [],
+        "out": [],
+        "env": []
+    },
+    {
+        "id": "a99fcbd1.cd0898",
+        "type": "subflow",
+        "name": "Get User",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 30,
+                "y": 40,
+                "wires": [
+                    {
+                        "id": "e2e148c2.265e98"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 260,
+                "y": 40,
+                "wires": [
+                    {
+                        "id": "e2e148c2.265e98",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": []
+    },
+    {
         "id": "9b97ee84.83a28",
         "type": "mongodb3",
         "z": 0,
@@ -1153,7 +1342,7 @@
         "func": "global.set('user_type', 'Updated');\nvar rec = msg.payload;\nflow.set(\"name\", rec.name)\n\nreturn rec",
         "outputs": 1,
         "noerr": 0,
-        "x": 1220,
+        "x": 1260,
         "y": 120,
         "wires": [
             [
@@ -1465,7 +1654,7 @@
         "y": 320,
         "wires": [
             [
-                "647dcf0c.da984"
+                "b37b6388.c0e34"
             ]
         ]
     },
@@ -1741,7 +1930,7 @@
         "links": [
             "9435546b.516d28"
         ],
-        "x": 1335,
+        "x": 1375,
         "y": 120,
         "wires": []
     },
@@ -1751,7 +1940,8 @@
         "z": "4c9161c6.7a8fe",
         "name": "Populate Fields (in)",
         "links": [
-            "36b1b3a5.b1127c"
+            "36b1b3a5.b1127c",
+            "c3f71bb5.2f46f8"
         ],
         "x": 1215,
         "y": 580,
@@ -1907,59 +2097,6 @@
         ]
     },
     {
-        "id": "e3af6b77.1751e8",
-        "type": "mongodb3 in",
-        "z": "4c9161c6.7a8fe",
-        "service": "_ext_",
-        "configNode": "9b97ee84.83a28",
-        "name": "User Exists?",
-        "collection": "LockManager",
-        "operation": "findOne",
-        "x": 850,
-        "y": 140,
-        "wires": [
-            [
-                "334b677d.0162f8"
-            ]
-        ]
-    },
-    {
-        "id": "ef87d463.6dbc08",
-        "type": "function",
-        "z": "4c9161c6.7a8fe",
-        "name": "Build Query",
-        "func": "if (msg.payload === undefined || msg.payload === \"\" || (msg.enabled !== undefined && !msg.enabled))\n    return [null, msg];\n\nmsg.name = msg.payload;\nmsg.payload = {\"name\": msg.payload}\nreturn msg;",
-        "outputs": 2,
-        "noerr": 0,
-        "x": 690,
-        "y": 140,
-        "wires": [
-            [
-                "e3af6b77.1751e8"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "3a2d6c6c.d17d34",
-        "type": "function",
-        "z": "4c9161c6.7a8fe",
-        "name": "name exists?",
-        "func": "global.set('user_type', 'Created');\nif (msg !== undefined && msg.payload !== undefined && msg.payload[0] !== undefined)\n  return [null, { payload: \"Name exists. Please select a name or enter a new name.\" }];\n\nvar name = msg.name;\nflow.set(\"name\", name);\nmsg = {};\nmsg.name = name;\nmsg.code = \"\";\nmsg.set_start = false;\nmsg.start_date = new Date();\nmsg.set_end = false;\nmsg.end_date = new Date(new Date().setFullYear(new Date().getFullYear() + 1));\nmsg.code_enabled = false;\nmsg.onetime = false;\nmsg.allow_when_home = false;\nmsg.schedule = false;\n\nreturn msg;",
-        "outputs": 2,
-        "noerr": 0,
-        "x": 1230,
-        "y": 160,
-        "wires": [
-            [
-                "36b1b3a5.b1127c"
-            ],
-            [
-                "bf02fed5.9155"
-            ]
-        ]
-    },
-    {
         "id": "bf02fed5.9155",
         "type": "ui_toast",
         "z": "4c9161c6.7a8fe",
@@ -1971,7 +2108,7 @@
         "cancel": "",
         "topic": "Warning",
         "name": "Warning",
-        "x": 1380,
+        "x": 1400,
         "y": 160,
         "wires": [
             [
@@ -1987,7 +2124,7 @@
         "func": "msg.payload = \"\";\nmsg.enabled = true;\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 1510,
+        "x": 1530,
         "y": 160,
         "wires": [
             [
@@ -2003,7 +2140,7 @@
         "links": [
             "3782852a.d4e47a"
         ],
-        "x": 1595,
+        "x": 1615,
         "y": 160,
         "wires": []
     },
@@ -2434,14 +2571,14 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1040,
+        "x": 900,
         "y": 140,
         "wires": [
             [
-                "ac2159.44302ea8"
+                "a6d54302.9c975"
             ],
             [
-                "3a2d6c6c.d17d34"
+                "3d196ecd.966092"
             ]
         ]
     },
@@ -2464,7 +2601,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1410,
+        "x": 1450,
         "y": 80,
         "wires": [
             [
@@ -2480,7 +2617,7 @@
         "links": [
             "4e23522c.da521c"
         ],
-        "x": 1535,
+        "x": 1575,
         "y": 80,
         "wires": []
     },
@@ -3212,22 +3349,18 @@
         "type": "function",
         "z": "4c9161c6.7a8fe",
         "name": "Validate Code",
-        "func": "if (msg.payload === '' || (msg.hasOwnProperty('enabled') && !msg.enabled)) {\n    node.status({fill:\"yellow\",shape:\"dot\",text:\"invalid\"});\n    return [null, msg];\n}\n\nconst code_length = global.get(\"code_length\");  \n\nvar exp = new RegExp(`^\\\\d{${code_length}}$`);\nif (!exp.test(msg.payload)) {\n    msg.code = msg.payload;\n    msg.topic = \"Invalid Code\";\n    msg.payload = `Please enter a ${code_length}-digit numeric code.`;\n    node.status({fill:\"red\",shape:\"dot\",text:\"validation error\"});\n    return [null, null, msg];\n}\n\nvar msg2 = {};\nnode.status({fill:\"green\",shape:\"dot\",text:\"valid\"});\nmsg2.code = msg.payload;\n\nmsg2.payload =  [  \n    { $or: [{ name: flow.get(\"name\") }, { code: msg.payload }] }\n];\nreturn msg2;\n",
+        "func": "if (msg.payload === '' || (msg.hasOwnProperty('enabled') && !msg.enabled)) {\n    node.status({ fill: \"red\", shape: \"dot\", text: \"invalid\" });\n    return [null, msg];\n}\n\nconst code_length = global.get(\"code_length\");  \n\nvar exp = new RegExp(`^\\\\d{${code_length}}$`);\nif (!exp.test(msg.payload)) {\n    msg.code = msg.payload;\n    msg.topic = \"Invalid Code\";\n    msg.payload = `Please enter a ${code_length}-digit numeric code.`;\n    node.status({ fill: \"red\", shape: \"dot\", text: \"validation error\" });\n    return [null, null, msg];\n}\n\nvar msg2 = {};\nnode.status({ fill: \"green\", shape: \"dot\", text: \"valid\" });\nmsg2.code = msg.payload;\n\nmsg2.payload =  [  \n    { $or: [{ name: flow.get(\"name\") }, { code: msg.payload }] }\n];\nreturn msg2;\n",
         "outputs": 3,
         "noerr": 0,
-        "x": 560,
+        "x": 700,
         "y": 320,
         "wires": [
             [
-                "5b420e1b.5a3d8",
-                "50812bdb.c4dbd4"
+                "b0b5a0fc.4f27b"
             ],
+            [],
             [
-                "a2e20f05.69b53"
-            ],
-            [
-                "6192e61.1e95c18",
-                "70e57f52.63e27"
+                "6192e61.1e95c18"
             ]
         ]
     },
@@ -3250,27 +3383,10 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1130,
-        "y": 300,
+        "x": 1070,
+        "y": 320,
         "wires": [
             []
-        ]
-    },
-    {
-        "id": "5b420e1b.5a3d8",
-        "type": "mongodb3 in",
-        "z": "4c9161c6.7a8fe",
-        "service": "_ext_",
-        "configNode": "9b97ee84.83a28",
-        "name": "Search for code",
-        "collection": "LockManager",
-        "operation": "find.toArray",
-        "x": 760,
-        "y": 280,
-        "wires": [
-            [
-                "510c3839.b7c888"
-            ]
         ]
     },
     {
@@ -3285,7 +3401,7 @@
         "cancel": "",
         "topic": "",
         "name": "Invalid Code",
-        "x": 750,
+        "x": 890,
         "y": 340,
         "wires": []
     },
@@ -3294,11 +3410,11 @@
         "type": "function",
         "z": "4c9161c6.7a8fe",
         "name": "Error message",
-        "func": "msg.highlight = \"red\";\nmsg.topic = \"Code in use\";\nmsg.code = msg.payload.code;\nmsg.payload = \"The entered code is already used. Please use a new code.\"\nreturn msg;",
+        "func": "msg.highlight = \"red\";\nmsg.topic = \"Code in use\";\nmsg.code = msg.code;\nmsg.payload = \"The entered code is already used. Please use a new code.\"\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1140,
-        "y": 260,
+        "x": 1080,
+        "y": 280,
         "wires": [
             [
                 "164d8298.0c9a7d"
@@ -3317,28 +3433,11 @@
         "cancel": "",
         "topic": "",
         "name": "Invalid Code",
-        "x": 1330,
-        "y": 260,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "510c3839.b7c888",
-        "type": "function",
-        "z": "4c9161c6.7a8fe",
-        "name": "Code found",
-        "func": "//for (var i in msg.payload)\nvar length = Object.keys(msg.payload).length;\n\nif (length > 1) {\n    node.status({fill:\"green\",shape:\"dot\",text:\"found\"});\n    return msg;\n} else {\n    node.status({fill:\"green\",shape:\"dot\",text:\"not found\"});\n    return [null, msg];\n}",
-        "outputs": 2,
-        "noerr": 0,
-        "x": 950,
+        "x": 1250,
         "y": 280,
         "wires": [
             [
-                "5bc5f60d.e22bb8"
-            ],
-            [
-                "cdf7aa3a.8122e8"
+                "6e188720.3221e8"
             ]
         ]
     },
@@ -3573,7 +3672,7 @@
         "y": 1380,
         "wires": [
             [
-                "65017f30.6e627"
+                "ee2612d3.4d78f"
             ]
         ]
     },
@@ -3718,48 +3817,6 @@
                 "76e00f84.7716e"
             ]
         ]
-    },
-    {
-        "id": "50812bdb.c4dbd4",
-        "type": "debug",
-        "z": "4c9161c6.7a8fe",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "x": 770,
-        "y": 380,
-        "wires": []
-    },
-    {
-        "id": "70e57f52.63e27",
-        "type": "debug",
-        "z": "4c9161c6.7a8fe",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "x": 1090,
-        "y": 380,
-        "wires": []
-    },
-    {
-        "id": "a2e20f05.69b53",
-        "type": "debug",
-        "z": "4c9161c6.7a8fe",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "x": 930,
-        "y": 380,
-        "wires": []
     },
     {
         "id": "4ccd2f3e.479f5",
@@ -3909,7 +3966,7 @@
                 "a597f1ef.0669"
             ],
             [
-                "ef87d463.6dbc08"
+                "8403305d.9107b"
             ]
         ]
     },
@@ -4028,6 +4085,7 @@
         "z": "4d149fd1.afec5",
         "position": "top right",
         "displayTime": "3",
+        "highlight": "",
         "outputs": 0,
         "ok": "OK",
         "cancel": "",
@@ -4063,7 +4121,7 @@
         "type": "function",
         "z": "4d149fd1.afec5",
         "name": "Show/hide keypad",
-        "func": "var moment = context.global.moment;\n\nif (global.get(\"use_keypad\")) {\n    const displayed = global.get(\"keypad_displayed\") || false;\n    msg.displayed = displayed;\n    const passcode = global.get(\"passcode\") || '';\n    msg.passcode = passcode;\n    if (passcode === '' && !displayed) {\n        return {\n            payload: true,\n            topic: \"show\",\n            passcode: passcode,\n            keypad_displayed: displayed\n        };\n    }\n    \n    node.status({ fill: \"blue\", shape:\"dot\", text: moment().format('MMM D h:mm a')} );\n        \n    return msg;\n} else {\n    node.status({ fill: \"red\", shape:\"dot\", text: 'keypad disabled - flow halted'} );\n}",
+        "func": "var moment = context.global.moment;\n\nif (global.get(\"use_keypad\")) {\n    const displayed = global.get(\"keypad_displayed\") || false;\n    msg.displayed = displayed;\n    const passcode = global.get(\"passcode\") || '';\n    msg.passcode = passcode;\n    if (passcode === '' && !displayed) {\n        return {\n            payload: true,\n            topic: \"show\",\n            passcode: passcode,\n            keypad_displayed: displayed\n        };\n    }\n    \n    node.status({ fill: \"green\", shape:\"dot\", text: moment().format('MMM D h:mm a')} );\n        \n    return msg;\n} else {\n    node.status({ fill: \"red\", shape:\"dot\", text: 'keypad disabled'} );\n}",
         "outputs": 1,
         "noerr": 0,
         "x": 290,
@@ -4234,7 +4292,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "Invalid pin",
+                "to": "Invalid pin entered",
                 "tot": "str"
             },
             {
@@ -4270,23 +4328,6 @@
         "wires": []
     },
     {
-        "id": "eeaa45af.de2078",
-        "type": "mongodb3 in",
-        "z": "4c9161c6.7a8fe",
-        "service": "_ext_",
-        "configNode": "9b97ee84.83a28",
-        "name": "Get Users",
-        "collection": "LockManager",
-        "operation": "find.toArray",
-        "x": 600,
-        "y": 1740,
-        "wires": [
-            [
-                "6ff36ad1.a45034"
-            ]
-        ]
-    },
-    {
         "id": "e9d30d29.a5775",
         "type": "inject",
         "z": "4c9161c6.7a8fe",
@@ -4303,22 +4344,6 @@
         "wires": [
             [
                 "44840e5f.d50ba"
-            ]
-        ]
-    },
-    {
-        "id": "6ff36ad1.a45034",
-        "type": "function",
-        "z": "4c9161c6.7a8fe",
-        "name": "Fill names",
-        "func": "node.debug(\"Filling names\");\nvar names = [];\n\nfor (var i in msg.payload)\n    names.push(msg.payload[i].name);\nmsg.options = names;\nmsg.payload = \"\";\nreturn msg;\n",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 750,
-        "y": 1740,
-        "wires": [
-            [
-                "9ed8267.040fed8"
             ]
         ]
     },
@@ -4393,7 +4418,7 @@
             "c23f535e.114b",
             "c9dd7f7f.9b57d"
         ],
-        "x": 855,
+        "x": 695,
         "y": 1740,
         "wires": []
     },
@@ -4409,23 +4434,7 @@
         "y": 1740,
         "wires": [
             [
-                "ca65750e.4f59a8"
-            ]
-        ]
-    },
-    {
-        "id": "ca65750e.4f59a8",
-        "type": "function",
-        "z": "4c9161c6.7a8fe",
-        "name": "Build Query",
-        "func": "msg.payload =  [\n    {},\n    { \n        projection : {_id: 0, name: 1}\n    }\n];\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 450,
-        "y": 1740,
-        "wires": [
-            [
-                "eeaa45af.de2078"
+                "53d4f830.16d4b8"
             ]
         ]
     },
@@ -4952,7 +4961,7 @@
         "service": "_ext_",
         "configNode": "7fbc5f5e.d45f6",
         "name": "Get Users",
-        "collection": "LockManager",
+        "collection": "LockUsers",
         "operation": "find.toArray",
         "x": 240,
         "y": 800,
@@ -5322,12 +5331,12 @@
         "id": "c6663354.daeec",
         "type": "function",
         "z": "702e3f6b.43278",
-        "name": "process notification",
+        "name": "lock notification",
         "func": "var _ = context.global.lodash;\nvar moment = context.global.moment;\n\nnode.status({ fill: \"blue\", shape:\"dot\", text: `Last notification at ${ moment().format('MMM D h:mm a') }` } );\n\nconst notify_devices = global.get(\"notify_devices\");\n\nconst data = { \n    message: msg.payload.status, \n    title: msg.payload.state\n}; \n\nif (_.isEmpty(notify_devices)) {\n    msg.payload = {\n        data: data\n    };\n    \n    return [null, msg];\n}\n\nmsg.payload = notify_devices;\nmsg.data = data;\n\nreturn msg;",
         "outputs": 2,
         "noerr": 0,
-        "x": 310,
-        "y": 80,
+        "x": 300,
+        "y": 120,
         "wires": [
             [
                 "68317eff.be435",
@@ -5731,7 +5740,8 @@
         "wires": [
             [
                 "454a9324.e77fec",
-                "73b71550.71df0c"
+                "73b71550.71df0c",
+                "a8f76afd.306c38"
             ]
         ]
     },
@@ -5770,8 +5780,8 @@
         "func": "var status = msg.data.new_state.attributes.lock_status;\nif (status.indexOf('user') == -1) {\n    // not a user code\n    msg.payload = {\n        state: `Door ${msg.payload}`,\n        type: msg.data.new_state.attributes.notification,\n        status: `Door ${msg.data.new_state.attributes.lock_status}`,\n        time: msg.data.new_state.last_updated\n    };\n    return msg;\n}\n\nconst slots = global.get(\"slots\");\nvar slot = Number(status.substring(status.lastIndexOf(' ') + 1));\n\nconst user = slots.find(u => u.slot === slot);\nif (user === undefined)\n    return [null, { payload: `Door was opened with a code that doesn't have a matching slot ${slot}. Good chance the lock.clear_usercode didn't work which means HA has probably been updated and I need to run the update zwave script` }];\n    \n\nvar m = {};\nm.user = user;\nm.slot = slot;\nm.slots = slots;\nm.status = msg.payload,\nm.payload = {\n    state: `Door ${msg.payload}`,\n    type: msg.data.new_state.attributes.notification,\n    og_status: msg.data.new_state.attributes.lock_status,\n    status: `${status.substring(0, status.indexOf('user') -  4)} by ${user.name}`,\n    time: msg.data.new_state.last_updated\n};\n\nreturn m;",
         "outputs": 2,
         "noerr": 0,
-        "x": 770,
-        "y": 460,
+        "x": 290,
+        "y": 420,
         "wires": [
             [
                 "4a6d913e.7bea7"
@@ -5792,8 +5802,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 1050,
-        "y": 440,
+        "x": 570,
+        "y": 400,
         "wires": []
     },
     {
@@ -5807,8 +5817,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 1050,
-        "y": 480,
+        "x": 570,
+        "y": 440,
         "wires": []
     },
     {
@@ -5877,7 +5887,7 @@
         "type": "function",
         "z": "bae968bd.7a3cb8",
         "name": "Encrypt",
-        "func": "var cryptojs = context.global.cryptojs;\n\nconst salt = global.get(\"encryption_key\");\n// Encrypt\nvar ciphertext = cryptojs.AES.encrypt(msg.payload, salt);\n\nmsg.payload = ciphertext;\n\nreturn msg;\n",
+        "func": "const cryptojs = context.global.cryptojs;\n\nconst salt = global.get(\"encryption_key\");\n\nlet payload = msg.payload;\nif (typeof payload === 'object' && payload !== null)\n    payload = JSON.stringify(payload);\n\nmsg.payload = cryptojs.AES.encrypt(payload, salt).toString();\n\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "x": 360,
@@ -5931,7 +5941,7 @@
         "type": "function",
         "z": "43717449.df2fbc",
         "name": "decrypt",
-        "func": "var cryptojs = context.global.cryptojs;\n\nconst salt = global.get(\"encryption_key\");\n\n// Decrypt\nvar bytes  = cryptojs.AES.decrypt(msg.payload.toString(), salt);\nvar plaintext = bytes.toString(cryptojs.enc.Utf8);\n\nmsg.payload = plaintext;\nreturn msg;\n",
+        "func": "const cryptojs = context.global.cryptojs;\n\nconst salt = global.get(\"encryption_key\");\n\n// Decrypt\nlet bytes  = cryptojs.AES.decrypt(msg.payload, salt);\nlet hashed = msg.payload;\nmsg.payload = bytes.toString(cryptojs.enc.Utf8);\n\n// catching an error is not a great way to check\ntry {\n    let obj = JSON.parse(msg.payload);\n\n    if (obj && typeof obj === \"object\") {\n        obj.hashed = hashed;\n        msg.payload = obj;\n    }\n}\ncatch (e) { node.log(\"caught error\");}\n\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "x": 340,
@@ -6064,7 +6074,7 @@
             "41e93222.8a3e9c"
         ],
         "x": 175,
-        "y": 80,
+        "y": 120,
         "wires": [
             [
                 "c6663354.daeec"
@@ -6137,7 +6147,7 @@
         "z": "593fb5af.ec311c",
         "name": "Fetch",
         "topic": "",
-        "payload": "{\"slot\": 9 }",
+        "payload": "{\"user\":\"U2FsdGVkX19wdyWENjjpLLwnFrn10sxD/vBVItsBz+I=\"}",
         "payloadType": "json",
         "repeat": "",
         "crontab": "",
@@ -6158,7 +6168,7 @@
         "service": "_ext_",
         "configNode": "7fbc5f5e.d45f6",
         "name": "Delete",
-        "collection": "LockSlots",
+        "collection": "LockUsers",
         "operation": "deleteOne",
         "x": 850,
         "y": 680,
@@ -6292,18 +6302,18 @@
         "name": "Lock/unlock activities",
         "info": "",
         "x": 260,
-        "y": 40,
+        "y": 80,
         "wires": []
     },
     {
         "id": "1f914ffa.6dd24",
         "type": "function",
         "z": "702e3f6b.43278",
-        "name": "process notification",
+        "name": "user notification",
         "func": "var _ = context.global.lodash;\nvar moment = context.global.moment;\n\nnode.status({ fill: \"blue\", shape:\"dot\", text: `Last notification at ${ moment().format('MMM D h:mm a') }` } );\n\nconst notify_devices = global.get(\"notify_devices\");\nconst action = global.get(\"user_type\");\n\nconst data = { \n    message: `${msg.name} [${msg.code}] was ${action.toLowerCase()}`, \n    title: `Lock Manager - User ${action}`\n}; \n\nif (_.isEmpty(notify_devices)) {\n    msg.payload = {\n        data: data\n    };\n    \n    return [null, msg];\n}\n\nmsg.payload = notify_devices;\nmsg.data = data;\n\nreturn msg;",
         "outputs": 2,
         "noerr": 0,
-        "x": 310,
+        "x": 300,
         "y": 220,
         "wires": [
             [
@@ -6372,11 +6382,11 @@
         "id": "6a5a542f.be06ec",
         "type": "function",
         "z": "702e3f6b.43278",
-        "name": "process notification",
+        "name": "scheduled notification",
         "func": "var _ = context.global.lodash;\nvar moment = context.global.moment;\n\nnode.status({ fill: \"blue\", shape:\"dot\", text: `Last notification at ${ moment().format('MMM D h:mm a') }` } );\n\nconst notify_devices = global.get(\"notify_devices\");\n\nconst data = { \n    message: `${msg.name} was ${msg.action.toLowerCase()} at ${ moment().format('MMM D h:mm a') }`, \n    title: `Lock Manager - Lock usercode ${msg.action}`\n}; \n\nif (_.isEmpty(notify_devices)) {\n    msg.payload = {\n        data: data\n    };\n    \n    return [null, msg];\n}\n\nmsg.payload = notify_devices;\nmsg.data = data;\n\nreturn msg;",
         "outputs": 2,
         "noerr": 0,
-        "x": 310,
+        "x": 320,
         "y": 380,
         "wires": [
             [
@@ -6416,7 +6426,7 @@
         "name": "scheduled activities",
         "info": "",
         "x": 250,
-        "y": 320,
+        "y": 340,
         "wires": []
     },
     {
@@ -6436,23 +6446,6 @@
         "wires": [
             [
                 "8ce0f7ef.d63848"
-            ]
-        ]
-    },
-    {
-        "id": "5e8b46ff.92d2e8",
-        "type": "mongodb3 in",
-        "z": "4c9161c6.7a8fe",
-        "service": "_ext_",
-        "configNode": "7fbc5f5e.d45f6",
-        "name": "Get User Slot",
-        "collection": "LockSlots",
-        "operation": "findOne",
-        "x": 840,
-        "y": 1660,
-        "wires": [
-            [
-                "c7bc435a.24b21"
             ]
         ]
     },
@@ -6516,78 +6509,6 @@
         "wires": [
             [],
             []
-        ]
-    },
-    {
-        "id": "c7bc435a.24b21",
-        "type": "function",
-        "z": "4c9161c6.7a8fe",
-        "name": "Slot found",
-        "func": "const _ = context.global.lodash;\n\nif (!_.isEmpty(msg.payload)) {\n    node.status({ fill: \"blue\", shape: \"dot\", text: \"continuing\" });\n    return msg;\n} else {\n    node.status({ fill: \"green\", shape: \"dot\", text: \"stopping\" });\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 1000,
-        "y": 1660,
-        "wires": [
-            [
-                "8e28663.dc5dc98"
-            ]
-        ]
-    },
-    {
-        "id": "1e8dc5a4.2aa74a",
-        "type": "mongodb3 in",
-        "z": "4c9161c6.7a8fe",
-        "service": "_ext_",
-        "configNode": "9b97ee84.83a28",
-        "name": "Delete Slot",
-        "collection": "LockSlots",
-        "operation": "deleteOne",
-        "x": 1470,
-        "y": 1640,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "84866d38.50571",
-        "type": "api-call-service",
-        "z": "4c9161c6.7a8fe",
-        "name": "Clear Lock Code",
-        "server": "21e39bfe.4a1524",
-        "version": "1",
-        "service_domain": "lock",
-        "service": "clear_usercode",
-        "entityId": "",
-        "data": "",
-        "dataType": "json",
-        "mergecontext": "",
-        "output_location": "",
-        "output_location_type": "none",
-        "mustacheAltTags": false,
-        "x": 1470,
-        "y": 1700,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "8e28663.dc5dc98",
-        "type": "function",
-        "z": "4c9161c6.7a8fe",
-        "name": "Delete lock code and slot user",
-        "func": "const slot = { \n    payload: [\n        {\n            slot: msg.payload.slot,\n            name: msg.payload.name\n        },\n        {}\n    ]\n};\nconst lock = { \n    payload: { \n        data: \n            { node_id: global.get(\"lock_node_id\"),\n            code_slot: msg.payload.slot\n        }\n    }\n};\nreturn [slot, lock];\n",
-        "outputs": 2,
-        "noerr": 0,
-        "x": 1210,
-        "y": 1660,
-        "wires": [
-            [
-                "1e8dc5a4.2aa74a"
-            ],
-            [
-                "84866d38.50571"
-            ]
         ]
     },
     {
@@ -6694,8 +6615,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 520,
-        "y": 400,
+        "x": 530,
+        "y": 380,
         "wires": []
     },
     {
@@ -6710,7 +6631,7 @@
         "complete": "true",
         "targetType": "full",
         "x": 530,
-        "y": 300,
+        "y": 280,
         "wires": []
     },
     {
@@ -6725,7 +6646,7 @@
         "complete": "true",
         "targetType": "full",
         "x": 530,
-        "y": 80,
+        "y": 120,
         "wires": []
     },
     {
@@ -7689,7 +7610,7 @@
         "type": "function",
         "z": "4d149fd1.afec5",
         "name": "Parse codes",
-        "func": "let valid = msg.users.filter(u => u.code_enabled && (validPermanent(u) || validSchedule(u)));\nlet invalid = msg.users\n    .filter(u => !valid.includes(u))\n    .concat(valid.filter(u => !msg.users.includes(u)));\n    \nlet need_to_add = valid.filter(u => !hasSlot(u));\n\n\nlet need_to_delete = invalid.filter(function(u) {\n  return hasSlot(u);\n}).map(function(u) { \n    let slot = getSlot(u);\n    if (slot !== undefined)\n        return {slot: slot.slot, name: slot.name}\n});\n\nlet add_count = need_to_add.length || 0;\nlet delete_count = need_to_delete.length || 0;\n\nnode.status({ fill: \"blue\", shape: \"dot\", text: `add: ${add_count} delete: ${delete_count}` });\n\nreturn [need_to_add, need_to_delete];\n\nfunction validPermanent(user) {\n    return (validStart(user) && validEnd(user) && validDay(user) && validTime(user) && validWhileAway(user))\n}\nfunction validStart(user) {\n    return !user.set_start || user.start_date <= now;\n}\n\nfunction validEnd(user) {\n    return !user.set_end || user.end_date >= now;\n}\n\nfunction validDay(user) {\n    if (!user.schedule)\n        return true;\n        \n    let d = new Date();\n    let weekday = new Array(7);\n    weekday[0] =  \"Sunday\";\n    weekday[1] = \"Monday\";\n    weekday[2] = \"Tuesday\";\n    weekday[3] = \"Wednesday\";\n    weekday[4] = \"Thursday\";\n    weekday[5] = \"Friday\";\n    weekday[6] = \"Saturday\";\n    var n = weekday[d.getDay()];\n    try {\n        var a = user.days.includes(n);\n    } catch(ex) { \n        node.log(`ERROR - ${JSON.stringify(user, null, 2)}`); \n    }\n    return !user.schedule || user.days.includes(n);\n}\n\nfunction validTime(user) {\n    let d = new Date(), e = new Date(d);\n    let msSinceMidnight = e - d.setHours(0, 0, 0, 0);\n    return !user.restrict_hours || (msSinceMidnight >= user.start_time && msSinceMidnight <= user.end_time);\n}\n\nfunction validWhileAway(user) {\n    let away = global.get(\"presence\") === \"all_away\";\n    return user.allow_when_home || away;\n}\n\nfunction validSchedule(user) {\n    return (validStart(user) && validEnd(user) && validDay(user) && validTime(user) && validWhileAway(user))\n}\n\nfunction hasSlot(user) {\n    return msg.slots.find(slot => slot.name  === user.name);\n}\n\nfunction getSlot(user) {\n    return msg.slots.find(slot => slot.name  === user.name);\n}",
+        "func": "let valid = msg.users.filter(u => u.code_enabled && (validPermanent(u) || validSchedule(u)));\nlet invalid = msg.users\n    .filter(u => !valid.includes(u))\n    .concat(valid.filter(u => !msg.users.includes(u)));\n    \nlet need_to_add = valid.filter(u => !hasSlot(u));\n\nlet need_to_delete = invalid.filter(function(u) {\n  return hasSlot(u);\n}).map(function(u) { \n    let slot = getSlot(u);\n    if (slot !== undefined)\n        return {slot: slot.slot, name: slot.name}\n});\n\nlet add_count = need_to_add.length || 0;\nlet delete_count = need_to_delete.length || 0;\n\nnode.status({ fill: \"blue\", shape: \"dot\", text: `add: ${add_count} delete: ${delete_count}` });\n\nreturn [need_to_add, need_to_delete];\n\nfunction validPermanent(user) {\n    return (validStart(user) && validEnd(user) && validDay(user) && validTime(user) && validWhileAway(user))\n}\nfunction validStart(user) {\n    return !user.set_start || user.start_date <= now;\n}\n\nfunction validEnd(user) {\n    return !user.set_end || user.end_date >= now;\n}\n\nfunction validDay(user) {\n    if (!user.schedule)\n        return true;\n        \n    let d = new Date();\n    let weekday = new Array(7);\n    weekday[0] =  \"Sunday\";\n    weekday[1] = \"Monday\";\n    weekday[2] = \"Tuesday\";\n    weekday[3] = \"Wednesday\";\n    weekday[4] = \"Thursday\";\n    weekday[5] = \"Friday\";\n    weekday[6] = \"Saturday\";\n    var n = weekday[d.getDay()];\n    try {\n        var a = user.days.includes(n);\n    } catch(ex) { \n        node.log(`ERROR - ${JSON.stringify(user, null, 2)}`); \n    }\n    return !user.schedule || user.days.includes(n);\n}\n\nfunction validTime(user) {\n    let d = new Date(), e = new Date(d);\n    let msSinceMidnight = e - d.setHours(0, 0, 0, 0);\n    return !user.restrict_hours || (msSinceMidnight >= user.start_time && msSinceMidnight <= user.end_time);\n}\n\nfunction validWhileAway(user) {\n    let away = global.get(\"presence\") === \"all_away\";\n    return user.allow_when_home || away;\n}\n\nfunction validSchedule(user) {\n    return (validStart(user) && validEnd(user) && validDay(user) && validTime(user) && validWhileAway(user))\n}\n\nfunction hasSlot(user) {\n    return msg.slots.find(slot => slot.name  === user.name);\n}\n\nfunction getSlot(user) {\n    return msg.slots.find(slot => slot.name  === user.name);\n}",
         "outputs": 2,
         "noerr": 0,
         "x": 690,
@@ -7856,7 +7777,7 @@
         "type": "function",
         "z": "593fb5af.ec311c",
         "name": "",
-        "func": "var helpers = global.get(\"helpers\");\nnode.log(helpers.examples());\nlet bob = {};\nlet bill = {a: 1};\nnode.log(helpers.isEmpty(bob));\nnode.log(helpers.isEmpty(bill));\n\nObject.prototype.isEmpty2 = function() {\n    node.log(\"made it 2\");\n    return !Object.getOwnPropertySymbols(this).length && !Object.getOwnPropertyNames(this).length;\n};\n\nreturn msg;",
+        "func": "var helpers = global.get(\"helpers\");\nnode.log(helpers.examples());\nlet t = \"abc\";\nlet bob = {};\nlet bill = {a: 1};\n\nnode.log(typeof bob === 'object' && bob !== null);\nnode.log(typeof t === 'object' && t !== null);\nnode.log(helpers.isEmpty(bob));\nnode.log(helpers.isEmpty(bill));\n\nObject.prototype.isEmpty2 = function() {\n    node.log(\"made it 2\");\n    return !Object.getOwnPropertySymbols(this).length && !Object.getOwnPropertyNames(this).length;\n};\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 250,
@@ -7873,9 +7794,12 @@
         "z": "593fb5af.ec311c",
         "name": "",
         "active": true,
-        "console": "false",
-        "complete": "false",
-        "x": 390,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 370,
         "y": 1580,
         "wires": []
     },
@@ -8508,6 +8432,2853 @@
         "wires": [
             [],
             []
+        ]
+    },
+    {
+        "id": "a8f76afd.306c38",
+        "type": "debug",
+        "z": "59474d53.1b40d4",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 190,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "a2105e98.9cba8",
+        "type": "function",
+        "z": "e037ddc.bbf4a2",
+        "name": "Validate Code",
+        "func": "if (msg.payload === '' || (msg.hasOwnProperty('enabled') && !msg.enabled)) {\n    node.status({ fill: \"yellow\", shape: \"dot\", text: \"invalid\" });\n    return [null, msg];\n}\n\nconst code_length = global.get(\"code_length\");  \n\nvar exp = new RegExp(`^\\\\d{${code_length}}$`);\nif (!exp.test(msg.payload)) {\n    msg.code = msg.payload;\n    msg.topic = \"Invalid Code\";\n    msg.payload = `Please enter a ${code_length}-digit numeric code.`;\n    node.status({ fill: \"red\", shape: \"dot\", text: \"validation error\" });\n    return [null, null, msg];\n}\n\nvar msg2 = {};\nnode.status({ fill: \"green\", shape: \"dot\", text: \"valid\" });\nmsg2.code = msg.payload;\n\nmsg2.payload =  [  \n    { $or: [{ name: flow.get(\"name\") }, { code: msg.payload }] }\n];\nreturn msg2;\n",
+        "outputs": 3,
+        "noerr": 0,
+        "x": 1020,
+        "y": 360,
+        "wires": [
+            [
+                "77745c84.fb9534"
+            ],
+            [],
+            [
+                "ec65ae72.1727d"
+            ]
+        ]
+    },
+    {
+        "id": "77745c84.fb9534",
+        "type": "mongodb3 in",
+        "z": "e037ddc.bbf4a2",
+        "service": "_ext_",
+        "configNode": "9b97ee84.83a28",
+        "name": "Search for code",
+        "collection": "LockManager",
+        "operation": "find.toArray",
+        "x": 1220,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ec65ae72.1727d",
+        "type": "ui_toast",
+        "z": "e037ddc.bbf4a2",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "",
+        "name": "Invalid Code",
+        "x": 1210,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "4ed5945c.0c875c",
+        "type": "inject",
+        "z": "e037ddc.bbf4a2",
+        "name": "Good Code",
+        "topic": "",
+        "payload": "{\"code\":\"4444\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 170,
+        "y": 520,
+        "wires": [
+            [
+                "cc00b1a.a8fa25"
+            ]
+        ]
+    },
+    {
+        "id": "bfc03925.07d368",
+        "type": "inject",
+        "z": "e037ddc.bbf4a2",
+        "name": "Bad Code",
+        "topic": "",
+        "payload": "{\"code\":\"5555\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 160,
+        "y": 560,
+        "wires": [
+            [
+                "cc00b1a.a8fa25"
+            ]
+        ]
+    },
+    {
+        "id": "cc00b1a.a8fa25",
+        "type": "switch",
+        "z": "e037ddc.bbf4a2",
+        "name": "Use encryption?",
+        "property": "use_encryption",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 360,
+        "y": 540,
+        "wires": [
+            [
+                "c1e6bdf.b8b294",
+                "59581d59.ba95e4"
+            ],
+            [
+                "84b3e7fd.aaae98",
+                "29b965e5.684c5a"
+            ]
+        ]
+    },
+    {
+        "id": "89c2d2da.7bb11",
+        "type": "mongodb3 in",
+        "z": "e037ddc.bbf4a2",
+        "service": "_ext_",
+        "configNode": "9b97ee84.83a28",
+        "name": "Get all",
+        "collection": "LockManager",
+        "operation": "find.toArray",
+        "x": 630,
+        "y": 520,
+        "wires": [
+            [
+                "79a4ca7.e6f3534"
+            ]
+        ]
+    },
+    {
+        "id": "84b3e7fd.aaae98",
+        "type": "mongodb3 in",
+        "z": "e037ddc.bbf4a2",
+        "service": "_ext_",
+        "configNode": "9b97ee84.83a28",
+        "name": "Get one",
+        "collection": "LockManager",
+        "operation": "findOne",
+        "x": 520,
+        "y": 560,
+        "wires": [
+            [
+                "89f92e39.1ff64"
+            ]
+        ]
+    },
+    {
+        "id": "c1e6bdf.b8b294",
+        "type": "change",
+        "z": "e037ddc.bbf4a2",
+        "name": "Empty",
+        "rules": [
+            {
+                "t": "set",
+                "p": "search_code",
+                "pt": "msg",
+                "to": "payload.code",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 520,
+        "wires": [
+            [
+                "89c2d2da.7bb11",
+                "e2297757.646b88"
+            ]
+        ]
+    },
+    {
+        "id": "2120cd5d.5d5672",
+        "type": "function",
+        "z": "56145c0c.026bc4",
+        "name": "Convert to Array of Objects",
+        "func": "msg.payload = Object.keys(msg.payload).map(key => msg.payload[key]);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 240,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "79a4ca7.e6f3534",
+        "type": "subflow:56145c0c.026bc4",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "env": [],
+        "x": 780,
+        "y": 520,
+        "wires": [
+            [
+                "34a1b311.79277c"
+            ]
+        ]
+    },
+    {
+        "id": "2ff1be6b.53fea2",
+        "type": "function",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "func": "let users = msg.payload;\nusers.forEach(function(user) {\n    if (selected.indexOf(day.title) > -1)\n        day.isChecked = true;\n    else\n        day.isChecked = false;\n});\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1250,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "34a1b311.79277c",
+        "type": "split",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 930,
+        "y": 520,
+        "wires": [
+            [
+                "3b0a7a9a.123a36",
+                "80e2b8d.4649a48"
+            ]
+        ]
+    },
+    {
+        "id": "4e4c3866.b74188",
+        "type": "subflow:43717449.df2fbc",
+        "z": "e037ddc.bbf4a2",
+        "x": 1390,
+        "y": 520,
+        "wires": [
+            [
+                "625f1744.963868",
+                "bc4a2da2.fc946"
+            ]
+        ]
+    },
+    {
+        "id": "625f1744.963868",
+        "type": "switch",
+        "z": "e037ddc.bbf4a2",
+        "name": "Matches?",
+        "property": "payload.code",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "search_code",
+                "vt": "msg"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1560,
+        "y": 520,
+        "wires": [
+            [
+                "1827ea57.8d92f6"
+            ],
+            [
+                "826003df.97638"
+            ]
+        ]
+    },
+    {
+        "id": "89f92e39.1ff64",
+        "type": "debug",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 670,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "e2297757.646b88",
+        "type": "debug",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 630,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "bc4a2da2.fc946",
+        "type": "debug",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 1546,
+        "y": 478,
+        "wires": []
+    },
+    {
+        "id": "1827ea57.8d92f6",
+        "type": "debug",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 1690,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "59581d59.ba95e4",
+        "type": "debug",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 490,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "3b0a7a9a.123a36",
+        "type": "debug",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 1190,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "4c63ff80.7412f",
+        "type": "inject",
+        "z": "e037ddc.bbf4a2",
+        "name": "Code 4444",
+        "topic": "",
+        "payload": "{\"code\":\"4444\"}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 160,
+        "y": 720,
+        "wires": [
+            [
+                "b8644644.24d3a8"
+            ]
+        ]
+    },
+    {
+        "id": "b8644644.24d3a8",
+        "type": "mongodb3 in",
+        "z": "e037ddc.bbf4a2",
+        "service": "_ext_",
+        "configNode": "9b97ee84.83a28",
+        "name": "Get one",
+        "collection": "LockManager",
+        "operation": "findOne",
+        "x": 320,
+        "y": 720,
+        "wires": [
+            [
+                "29b965e5.684c5a",
+                "92a8202a.68101"
+            ]
+        ]
+    },
+    {
+        "id": "ae9eddcc.4cc11",
+        "type": "debug",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 710,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "92a8202a.68101",
+        "type": "subflow:bae968bd.7a3cb8",
+        "z": "e037ddc.bbf4a2",
+        "x": 510,
+        "y": 720,
+        "wires": [
+            [
+                "ae9eddcc.4cc11",
+                "99b3e34b.704d4",
+                "73b15ebc.bedf8"
+            ]
+        ]
+    },
+    {
+        "id": "99b3e34b.704d4",
+        "type": "subflow:43717449.df2fbc",
+        "z": "e037ddc.bbf4a2",
+        "x": 510,
+        "y": 760,
+        "wires": [
+            [
+                "30999477.d40bdc"
+            ]
+        ]
+    },
+    {
+        "id": "30999477.d40bdc",
+        "type": "debug",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 690,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "29b965e5.684c5a",
+        "type": "debug",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 410,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "2e29c0b0.481e6",
+        "type": "function",
+        "z": "e037ddc.bbf4a2",
+        "name": "Encrypt",
+        "func": "var cryptojs = context.global.cryptojs;\n\nconst salt = global.get(\"encryption_key\");\n\nlet payload = msg.payload;\nif (typeof payload === 'object' && payload !== null)\n    payload = JSON.stringify(payload);\n\nvar ciphertext = cryptojs.AES.encrypt(payload, salt);\n\nmsg.payload = ciphertext;\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 600,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "73b15ebc.bedf8",
+        "type": "function",
+        "z": "e037ddc.bbf4a2",
+        "name": "Query",
+        "func": "let q = { payload: [\n    { \n        user: msg.payload\n    },\n    { forceServerObjectId: true }\n]};\nreturn q;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 730,
+        "y": 720,
+        "wires": [
+            [
+                "966a8478.dafb28"
+            ]
+        ]
+    },
+    {
+        "id": "966a8478.dafb28",
+        "type": "mongodb3 in",
+        "z": "e037ddc.bbf4a2",
+        "service": "_ext_",
+        "configNode": "9b97ee84.83a28",
+        "name": "insert",
+        "collection": "LockUsers",
+        "operation": "insertOne",
+        "x": 890,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f4a56d16.91aeb",
+        "type": "change",
+        "z": "e037ddc.bbf4a2",
+        "name": "Set payload",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.user",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1210,
+        "y": 520,
+        "wires": [
+            [
+                "4e4c3866.b74188"
+            ]
+        ]
+    },
+    {
+        "id": "80e2b8d.4649a48",
+        "type": "switch",
+        "z": "e037ddc.bbf4a2",
+        "name": "Matches?",
+        "property": "payload.user",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1060,
+        "y": 520,
+        "wires": [
+            [
+                "f4a56d16.91aeb"
+            ]
+        ]
+    },
+    {
+        "id": "826003df.97638",
+        "type": "debug",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 1690,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "134d8b9b.f92ca4",
+        "type": "inject",
+        "z": "593fb5af.ec311c",
+        "name": "Fetch",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 730,
+        "y": 840,
+        "wires": [
+            [
+                "8c6e427d.0ff3d"
+            ]
+        ]
+    },
+    {
+        "id": "c6cdd139.3663a",
+        "type": "mongodb3 in",
+        "z": "593fb5af.ec311c",
+        "service": "_ext_",
+        "configNode": "7fbc5f5e.d45f6",
+        "name": "Delete",
+        "collection": "LockManager",
+        "operation": "deleteOne",
+        "x": 990,
+        "y": 860,
+        "wires": [
+            [
+                "74edfb43.66a824"
+            ]
+        ]
+    },
+    {
+        "id": "74edfb43.66a824",
+        "type": "debug",
+        "z": "593fb5af.ec311c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 1130,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "8c6e427d.0ff3d",
+        "type": "function",
+        "z": "593fb5af.ec311c",
+        "name": "",
+        "func": "return { \"_id\": \"5d482ae843f7a77acaf9b24d\" }",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 850,
+        "y": 880,
+        "wires": [
+            [
+                "c6cdd139.3663a"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "2fd7edc2.e84a12",
+        "type": "inject",
+        "z": "593fb5af.ec311c",
+        "name": "Fetch",
+        "topic": "",
+        "payload": "{ }",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 710,
+        "y": 1100,
+        "wires": [
+            [
+                "115715db.7e808a"
+            ]
+        ]
+    },
+    {
+        "id": "115715db.7e808a",
+        "type": "mongodb3 in",
+        "z": "593fb5af.ec311c",
+        "service": "_ext_",
+        "configNode": "7fbc5f5e.d45f6",
+        "name": "Delete",
+        "collection": "LockUsers",
+        "operation": "deleteMany",
+        "x": 830,
+        "y": 1100,
+        "wires": [
+            [
+                "32f3a819.b3aad8"
+            ]
+        ]
+    },
+    {
+        "id": "32f3a819.b3aad8",
+        "type": "debug",
+        "z": "593fb5af.ec311c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 970,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "77d4baa9.6858a4",
+        "type": "comment",
+        "z": "593fb5af.ec311c",
+        "name": "Truncate LockUsers table",
+        "info": "",
+        "x": 750,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "3d9a9ddc.3ff2e2",
+        "type": "subflow:bae968bd.7a3cb8",
+        "z": "e037ddc.bbf4a2",
+        "x": 950,
+        "y": 80,
+        "wires": [
+            [
+                "7b2235e.95970cc"
+            ]
+        ]
+    },
+    {
+        "id": "7b2235e.95970cc",
+        "type": "function",
+        "z": "e037ddc.bbf4a2",
+        "name": "Query",
+        "func": "let q = { payload: [\n    { \n        user: msg.payload\n    },\n    { forceServerObjectId: true }\n]};\nreturn q;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1110,
+        "y": 80,
+        "wires": [
+            [
+                "80652175.1aa0a"
+            ]
+        ]
+    },
+    {
+        "id": "80652175.1aa0a",
+        "type": "mongodb3 in",
+        "z": "e037ddc.bbf4a2",
+        "service": "_ext_",
+        "configNode": "9b97ee84.83a28",
+        "name": "insert",
+        "collection": "LockUsers",
+        "operation": "insertOne",
+        "x": 1230,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a8bfb1b.aee9f5",
+        "type": "inject",
+        "z": "e037ddc.bbf4a2",
+        "name": "ForEach",
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 640,
+        "y": 80,
+        "wires": [
+            [
+                "c0a2de94.d7e03"
+            ]
+        ]
+    },
+    {
+        "id": "c0a2de94.d7e03",
+        "type": "mongodb3 in",
+        "z": "e037ddc.bbf4a2",
+        "service": "_ext_",
+        "configNode": "9b97ee84.83a28",
+        "name": "forEach",
+        "collection": "LockManager",
+        "operation": "find.forEach",
+        "x": 780,
+        "y": 80,
+        "wires": [
+            [
+                "3d9a9ddc.3ff2e2"
+            ]
+        ]
+    },
+    {
+        "id": "98be4aa5.9555c8",
+        "type": "comment",
+        "z": "e037ddc.bbf4a2",
+        "name": "### Build encrypted LockUsers from LockManager ###",
+        "info": "",
+        "x": 760,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "c9749e4f.153b7",
+        "type": "change",
+        "z": "cd3e33e6.2da5b",
+        "name": "Prep query",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 170,
+        "y": 80,
+        "wires": [
+            [
+                "26324fb.902a8b"
+            ]
+        ]
+    },
+    {
+        "id": "26324fb.902a8b",
+        "type": "mongodb3 in",
+        "z": "cd3e33e6.2da5b",
+        "service": "_ext_",
+        "configNode": "9b97ee84.83a28",
+        "name": "Get users",
+        "collection": "LockUsers",
+        "operation": "find.toArray",
+        "x": 320,
+        "y": 80,
+        "wires": [
+            [
+                "9512aabc.75d858"
+            ]
+        ]
+    },
+    {
+        "id": "9512aabc.75d858",
+        "type": "subflow:56145c0c.026bc4",
+        "z": "cd3e33e6.2da5b",
+        "name": "",
+        "env": [],
+        "x": 480,
+        "y": 80,
+        "wires": [
+            [
+                "6b7de44d.b2462c"
+            ]
+        ]
+    },
+    {
+        "id": "6b7de44d.b2462c",
+        "type": "switch",
+        "z": "cd3e33e6.2da5b",
+        "name": "Use encryption?",
+        "property": "use_encryption",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 660,
+        "y": 80,
+        "wires": [
+            [
+                "8fcc4c30.88ec2"
+            ],
+            [
+                "a9c6afa3.e41be"
+            ]
+        ]
+    },
+    {
+        "id": "e1458e1c.fc9f1",
+        "type": "inject",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 100,
+        "y": 1080,
+        "wires": [
+            [
+                "67ba05e4.25342c"
+            ]
+        ]
+    },
+    {
+        "id": "57fc0e72.525e6",
+        "type": "subflow:43717449.df2fbc",
+        "z": "cd3e33e6.2da5b",
+        "x": 1130,
+        "y": 80,
+        "wires": [
+            [
+                "95340430.79a298"
+            ]
+        ]
+    },
+    {
+        "id": "3ddd238c.2c6a3c",
+        "type": "debug",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 370,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "5299175.13dd3e8",
+        "type": "change",
+        "z": "e037ddc.bbf4a2",
+        "name": "Empty",
+        "rules": [
+            {
+                "t": "set",
+                "p": "search_code",
+                "pt": "msg",
+                "to": "payload.code",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 250,
+        "y": 1180,
+        "wires": [
+            [
+                "6a7c458a.2837dc"
+            ]
+        ]
+    },
+    {
+        "id": "6a7c458a.2837dc",
+        "type": "mongodb3 in",
+        "z": "e037ddc.bbf4a2",
+        "service": "_ext_",
+        "configNode": "9b97ee84.83a28",
+        "name": "Get users",
+        "collection": "LockUsers",
+        "operation": "find.forEach",
+        "x": 380,
+        "y": 1180,
+        "wires": [
+            [
+                "55e6df5d.5426c",
+                "76089500.3ffa3c"
+            ]
+        ]
+    },
+    {
+        "id": "55e6df5d.5426c",
+        "type": "switch",
+        "z": "e037ddc.bbf4a2",
+        "name": "Use encryption?",
+        "property": "use_encryption",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 540,
+        "y": 1180,
+        "wires": [
+            [
+                "ff4e8372.ea48c"
+            ],
+            [
+                "f3e276d3.093798"
+            ]
+        ]
+    },
+    {
+        "id": "5a5bab3d.8b9384",
+        "type": "inject",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 100,
+        "y": 1180,
+        "wires": [
+            [
+                "5299175.13dd3e8"
+            ]
+        ]
+    },
+    {
+        "id": "c0c71d9f.34154",
+        "type": "subflow:43717449.df2fbc",
+        "z": "e037ddc.bbf4a2",
+        "x": 890,
+        "y": 1160,
+        "wires": [
+            [
+                "fa31e792.2ef8f8"
+            ]
+        ]
+    },
+    {
+        "id": "f3e276d3.093798",
+        "type": "debug",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 870,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "fa31e792.2ef8f8",
+        "type": "debug",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 1050,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "76089500.3ffa3c",
+        "type": "debug",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 510,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "ff4e8372.ea48c",
+        "type": "change",
+        "z": "e037ddc.bbf4a2",
+        "name": "Set payload",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.user",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 710,
+        "y": 1160,
+        "wires": [
+            [
+                "c0c71d9f.34154"
+            ]
+        ]
+    },
+    {
+        "id": "953f3e07.216bb",
+        "type": "change",
+        "z": "cd3e33e6.2da5b",
+        "name": "Set payload",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.user",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 950,
+        "y": 80,
+        "wires": [
+            [
+                "57fc0e72.525e6"
+            ]
+        ]
+    },
+    {
+        "id": "8fcc4c30.88ec2",
+        "type": "split",
+        "z": "cd3e33e6.2da5b",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 810,
+        "y": 80,
+        "wires": [
+            [
+                "953f3e07.216bb"
+            ]
+        ]
+    },
+    {
+        "id": "95340430.79a298",
+        "type": "join",
+        "z": "cd3e33e6.2da5b",
+        "name": "",
+        "mode": "auto",
+        "build": "string",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": "false",
+        "timeout": "",
+        "count": "",
+        "reduceRight": false,
+        "x": 1290,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "67ba05e4.25342c",
+        "type": "subflow:cd3e33e6.2da5b",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "env": [],
+        "x": 240,
+        "y": 1080,
+        "wires": [
+            [
+                "3ddd238c.2c6a3c"
+            ]
+        ]
+    },
+    {
+        "id": "a9c6afa3.e41be",
+        "type": "link out",
+        "z": "cd3e33e6.2da5b",
+        "name": "Call return user records",
+        "links": [
+            "f6e8edc7.e28f"
+        ],
+        "x": 775,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "f6e8edc7.e28f",
+        "type": "link in",
+        "z": "cd3e33e6.2da5b",
+        "name": "Return user records",
+        "links": [
+            "a9c6afa3.e41be",
+            "66c3cd7d.df3254"
+        ],
+        "x": 1335,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "53d4f830.16d4b8",
+        "type": "subflow:cd3e33e6.2da5b",
+        "z": "4c9161c6.7a8fe",
+        "name": "",
+        "x": 440,
+        "y": 1740,
+        "wires": [
+            [
+                "962791eb.37895",
+                "96834603.605d08"
+            ]
+        ]
+    },
+    {
+        "id": "962791eb.37895",
+        "type": "debug",
+        "z": "4c9161c6.7a8fe",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 570,
+        "y": 1700,
+        "wires": []
+    },
+    {
+        "id": "96834603.605d08",
+        "type": "function",
+        "z": "4c9161c6.7a8fe",
+        "name": "Fill names",
+        "func": "msg.options = msg.payload.map(value => value['name']);\nmsg.payload = \"\";\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 590,
+        "y": 1740,
+        "wires": [
+            [
+                "9ed8267.040fed8"
+            ]
+        ]
+    },
+    {
+        "id": "b397cd4a.e9fc7",
+        "type": "inject",
+        "z": "593fb5af.ec311c",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 560,
+        "y": 1520,
+        "wires": [
+            [
+                "e77e6f93.e301f"
+            ]
+        ]
+    },
+    {
+        "id": "bb58ffa2.a124c",
+        "type": "debug",
+        "z": "593fb5af.ec311c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 1030,
+        "y": 1480,
+        "wires": []
+    },
+    {
+        "id": "e77e6f93.e301f",
+        "type": "function",
+        "z": "593fb5af.ec311c",
+        "name": "code",
+        "func": "return { code: \"4844\" }\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 710,
+        "y": 1520,
+        "wires": [
+            [
+                "948cbec.c8bfd4"
+            ]
+        ]
+    },
+    {
+        "id": "49a9c0a4.0b32a",
+        "type": "subflow:cd3e33e6.2da5b",
+        "z": "3f31c381.f34b6c",
+        "name": "",
+        "env": [],
+        "x": 160,
+        "y": 80,
+        "wires": [
+            [
+                "3003d25.68d252e"
+            ]
+        ]
+    },
+    {
+        "id": "3003d25.68d252e",
+        "type": "function",
+        "z": "3f31c381.f34b6c",
+        "name": "Find code",
+        "func": "let exists = msg.payload.some(u => u.code === msg.code);\nif (exists)\n    return msg.payload.find(u => u.code === msg.code);\nelse\n    return [null, { code: msg.code }];\n",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 300,
+        "y": 80,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "948cbec.c8bfd4",
+        "type": "subflow:3f31c381.f34b6c",
+        "z": "593fb5af.ec311c",
+        "name": "",
+        "x": 860,
+        "y": 1520,
+        "wires": [
+            [
+                "bb58ffa2.a124c"
+            ],
+            [
+                "12499478.10787c"
+            ]
+        ]
+    },
+    {
+        "id": "12499478.10787c",
+        "type": "debug",
+        "z": "593fb5af.ec311c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 1050,
+        "y": 1560,
+        "wires": []
+    },
+    {
+        "id": "b0b5a0fc.4f27b",
+        "type": "subflow:3f31c381.f34b6c",
+        "z": "4c9161c6.7a8fe",
+        "name": "",
+        "x": 890,
+        "y": 300,
+        "wires": [
+            [
+                "5bc5f60d.e22bb8"
+            ],
+            [
+                "cdf7aa3a.8122e8"
+            ]
+        ]
+    },
+    {
+        "id": "3cbdb854.7be778",
+        "type": "link out",
+        "z": "4c9161c6.7a8fe",
+        "name": "Call set code",
+        "links": [
+            "68a688ea.e8c558"
+        ],
+        "x": 1475,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "68a688ea.e8c558",
+        "type": "link in",
+        "z": "4c9161c6.7a8fe",
+        "name": "Set code",
+        "links": [
+            "3cbdb854.7be778"
+        ],
+        "x": 155,
+        "y": 260,
+        "wires": [
+            [
+                "fc2e712c.245da"
+            ]
+        ]
+    },
+    {
+        "id": "6e188720.3221e8",
+        "type": "change",
+        "z": "4c9161c6.7a8fe",
+        "name": "Empty",
+        "rules": [
+            {
+                "t": "set",
+                "p": "code",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1390,
+        "y": 280,
+        "wires": [
+            [
+                "3cbdb854.7be778"
+            ]
+        ]
+    },
+    {
+        "id": "3b122e6b.a70352",
+        "type": "subflow:cd3e33e6.2da5b",
+        "z": "b8e924ca.5a2238",
+        "name": "",
+        "env": [],
+        "x": 300,
+        "y": 100,
+        "wires": [
+            [
+                "3d6a34bf.abdfdc"
+            ]
+        ]
+    },
+    {
+        "id": "3d6a34bf.abdfdc",
+        "type": "function",
+        "z": "b8e924ca.5a2238",
+        "name": "Find name",
+        "func": "let exists = msg.payload.some(u => u.name === msg.name);\nlet payload = '';\nif (exists) {\n    msg.payload = msg.payload.find(u => u.name === msg.name);\n    return msg;\n}\n\nmsg.payload = {};\nreturn [null, msg];\n",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 450,
+        "y": 100,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "56f5a17b.3cfc1",
+        "type": "subflow:cd3e33e6.2da5b",
+        "z": "593fb5af.ec311c",
+        "name": "",
+        "env": [],
+        "x": 740,
+        "y": 1680,
+        "wires": [
+            [
+                "111ec2b1.7770dd",
+                "b63f7c71.6cb9e"
+            ]
+        ]
+    },
+    {
+        "id": "111ec2b1.7770dd",
+        "type": "function",
+        "z": "593fb5af.ec311c",
+        "name": "Find name",
+        "func": "let exists = msg.payload.some(u => u.name === msg.name);\nif (exists)\n    return msg.payload.find(u => u.name === msg.name);\nelse\n    return [null, { name: msg.name }];\n",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 890,
+        "y": 1680,
+        "wires": [
+            [
+                "c435beb9.b3fe2"
+            ],
+            [
+                "d42f0733.473ed8"
+            ]
+        ]
+    },
+    {
+        "id": "8997299d.6f3c18",
+        "type": "debug",
+        "z": "593fb5af.ec311c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 670,
+        "y": 1740,
+        "wires": []
+    },
+    {
+        "id": "c435beb9.b3fe2",
+        "type": "debug",
+        "z": "593fb5af.ec311c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1110,
+        "y": 1660,
+        "wires": []
+    },
+    {
+        "id": "d42f0733.473ed8",
+        "type": "debug",
+        "z": "593fb5af.ec311c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 1110,
+        "y": 1700,
+        "wires": []
+    },
+    {
+        "id": "7e83d2dd.b442fc",
+        "type": "inject",
+        "z": "593fb5af.ec311c",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 420,
+        "y": 1680,
+        "wires": [
+            [
+                "e15cc697.ff2f98"
+            ]
+        ]
+    },
+    {
+        "id": "e15cc697.ff2f98",
+        "type": "function",
+        "z": "593fb5af.ec311c",
+        "name": "name",
+        "func": "return { name: \"Sarah\" }\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 570,
+        "y": 1680,
+        "wires": [
+            [
+                "56f5a17b.3cfc1",
+                "8997299d.6f3c18"
+            ]
+        ]
+    },
+    {
+        "id": "b63f7c71.6cb9e",
+        "type": "debug",
+        "z": "593fb5af.ec311c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 890,
+        "y": 1740,
+        "wires": []
+    },
+    {
+        "id": "3abab958.832826",
+        "type": "change",
+        "z": "b8e924ca.5a2238",
+        "name": "Set name",
+        "rules": [
+            {
+                "t": "set",
+                "p": "name",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 160,
+        "y": 100,
+        "wires": [
+            [
+                "3b122e6b.a70352"
+            ]
+        ]
+    },
+    {
+        "id": "8403305d.9107b",
+        "type": "switch",
+        "z": "4c9161c6.7a8fe",
+        "name": "name entered?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 700,
+        "y": 140,
+        "wires": [
+            [
+                "334b677d.0162f8"
+            ]
+        ]
+    },
+    {
+        "id": "fcd216fe.ec1298",
+        "type": "function",
+        "z": "7a1645fc.9c114c",
+        "name": "Query",
+        "func": "msg.payload = [\n    { \"name\": msg.payload.name },\n    { $set: msg.payload },\n    { upsert: true, returnOriginal: false }\n];\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 310,
+        "y": 60,
+        "wires": [
+            [
+                "d038b1aa.e5522"
+            ]
+        ]
+    },
+    {
+        "id": "d038b1aa.e5522",
+        "type": "mongodb3 in",
+        "z": "7a1645fc.9c114c",
+        "service": "_ext_",
+        "configNode": "9b97ee84.83a28",
+        "name": "Upsert User",
+        "collection": "LockManager",
+        "operation": "findOneAndUpdate",
+        "x": 450,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "87449557.d503e8",
+        "type": "subflow:cd3e33e6.2da5b",
+        "z": "7a1645fc.9c114c",
+        "name": "",
+        "env": [],
+        "x": 140,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a80c7ede.0a6af",
+        "type": "subflow:b8e924ca.5a2238",
+        "z": "7a1645fc.9c114c",
+        "name": "",
+        "x": 170,
+        "y": 100,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "3d196ecd.966092",
+        "type": "subflow:b8e924ca.5a2238",
+        "z": "4c9161c6.7a8fe",
+        "name": "",
+        "x": 1090,
+        "y": 180,
+        "wires": [
+            [
+                "3cfee453.2c2f0c"
+            ],
+            [
+                "be82620.8918da"
+            ]
+        ]
+    },
+    {
+        "id": "3cfee453.2c2f0c",
+        "type": "function",
+        "z": "4c9161c6.7a8fe",
+        "name": "Error",
+        "func": "return { payload: \"Name exists. Please select exiting user or enter a new name.\" };\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1250,
+        "y": 160,
+        "wires": [
+            [
+                "bf02fed5.9155"
+            ]
+        ]
+    },
+    {
+        "id": "be82620.8918da",
+        "type": "function",
+        "z": "4c9161c6.7a8fe",
+        "name": "Blank",
+        "func": "global.set('user_type', 'Created');\n\nvar name = msg.name;\nflow.set(\"name\", name);\nmsg = {};\nmsg.name = name;\nmsg.code = \"\";\nmsg.set_start = false;\nmsg.start_date = new Date();\nmsg.set_end = false;\nmsg.end_date = new Date(new Date().setFullYear(new Date().getFullYear() + 1));\nmsg.code_enabled = false;\nmsg.onetime = false;\nmsg.allow_when_home = false;\nmsg.schedule = false;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1250,
+        "y": 200,
+        "wires": [
+            [
+                "c3f71bb5.2f46f8"
+            ]
+        ]
+    },
+    {
+        "id": "c3f71bb5.2f46f8",
+        "type": "link out",
+        "z": "4c9161c6.7a8fe",
+        "name": "Populate Fields (out)",
+        "links": [
+            "9435546b.516d28"
+        ],
+        "x": 1355,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "e2e148c2.265e98",
+        "type": "subflow:b8e924ca.5a2238",
+        "z": "a99fcbd1.cd0898",
+        "name": "",
+        "env": [],
+        "x": 150,
+        "y": 40,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "a6d54302.9c975",
+        "type": "subflow:a99fcbd1.cd0898",
+        "z": "4c9161c6.7a8fe",
+        "name": "",
+        "x": 1100,
+        "y": 120,
+        "wires": [
+            [
+                "ac2159.44302ea8"
+            ]
+        ]
+    },
+    {
+        "id": "b37b6388.c0e34",
+        "type": "switch",
+        "z": "4c9161c6.7a8fe",
+        "name": "Update?",
+        "property": "user_type",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Updated",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 520,
+        "y": 320,
+        "wires": [
+            [
+                "e23e41b3.c59ec"
+            ],
+            [
+                "647dcf0c.da984"
+            ]
+        ]
+    },
+    {
+        "id": "e23e41b3.c59ec",
+        "type": "change",
+        "z": "4c9161c6.7a8fe",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "code",
+                "pt": "flow",
+                "to": "code",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 690,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "84d66ff.a14db9",
+        "type": "function",
+        "z": "7a1645fc.9c114c",
+        "name": "Query",
+        "func": "msg.payload = [\n    { \"name\": msg.payload.name },\n    { $set: msg.payload },\n    { upsert: true, returnOriginal: false }\n];\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 310,
+        "y": 140,
+        "wires": [
+            [
+                "420fa6b9.f4e308"
+            ]
+        ]
+    },
+    {
+        "id": "420fa6b9.f4e308",
+        "type": "mongodb3 in",
+        "z": "7a1645fc.9c114c",
+        "service": "_ext_",
+        "configNode": "9b97ee84.83a28",
+        "name": "Upsert User",
+        "collection": "LockManager",
+        "operation": "findOneAndUpdate",
+        "x": 450,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "143df20b.b32abe",
+        "type": "subflow:bae968bd.7a3cb8",
+        "z": "7a1645fc.9c114c",
+        "x": 450,
+        "y": 260,
+        "wires": [
+            [
+                "ccaf5f9a.d95f7"
+            ]
+        ]
+    },
+    {
+        "id": "ccaf5f9a.d95f7",
+        "type": "function",
+        "z": "7a1645fc.9c114c",
+        "name": "Query",
+        "func": "let q = { payload: [\n    { \n        user: msg.payload\n    },\n    { forceServerObjectId: true }\n]};\nreturn q;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 670,
+        "y": 260,
+        "wires": [
+            [
+                "d2732b99.9c9b78"
+            ]
+        ]
+    },
+    {
+        "id": "d2732b99.9c9b78",
+        "type": "mongodb3 in",
+        "z": "7a1645fc.9c114c",
+        "service": "_ext_",
+        "configNode": "9b97ee84.83a28",
+        "name": "insert",
+        "collection": "LockUsers",
+        "operation": "insertOne",
+        "x": 830,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "acae3c7.711edc",
+        "type": "function",
+        "z": "e037ddc.bbf4a2",
+        "name": "Query",
+        "func": "msg.payload = [\n    { \"name\": msg.payload.name },\n    { $set: msg.payload },\n    { upsert: true, returnOriginal: false }\n];\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 630,
+        "y": 1660,
+        "wires": [
+            [
+                "442622eb.8cfd5c"
+            ]
+        ]
+    },
+    {
+        "id": "442622eb.8cfd5c",
+        "type": "mongodb3 in",
+        "z": "e037ddc.bbf4a2",
+        "service": "_ext_",
+        "configNode": "9b97ee84.83a28",
+        "name": "Upsert User",
+        "collection": "LockManager",
+        "operation": "findOneAndUpdate",
+        "x": 770,
+        "y": 1660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ae3ad5c1.fe2c38",
+        "type": "subflow:cd3e33e6.2da5b",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "env": [],
+        "x": 480,
+        "y": 2040,
+        "wires": [
+            [
+                "e65b24ce.9f02f8"
+            ]
+        ]
+    },
+    {
+        "id": "43c73954.73af78",
+        "type": "subflow:b8e924ca.5a2238",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "env": [],
+        "x": 370,
+        "y": 1560,
+        "wires": [
+            [
+                "172c492f.6a6d97",
+                "f4aea1ce.7e11"
+            ],
+            [
+                "60f99ec2.7a21d",
+                "9af8159.d2befe8"
+            ]
+        ]
+    },
+    {
+        "id": "a995ea89.274bf8",
+        "type": "function",
+        "z": "e037ddc.bbf4a2",
+        "name": "Query",
+        "func": "msg.payload = [\n    { \"name\": msg.payload.name },\n    { $set: msg.payload },\n    { upsert: true, returnOriginal: false }\n];\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 450,
+        "y": 1720,
+        "wires": [
+            [
+                "f03e2634.e8c3a8"
+            ]
+        ]
+    },
+    {
+        "id": "f03e2634.e8c3a8",
+        "type": "mongodb3 in",
+        "z": "e037ddc.bbf4a2",
+        "service": "_ext_",
+        "configNode": "9b97ee84.83a28",
+        "name": "Upsert User",
+        "collection": "LockManager",
+        "operation": "findOneAndUpdate",
+        "x": 590,
+        "y": 1720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a2eac1f6.df588",
+        "type": "subflow:bae968bd.7a3cb8",
+        "z": "e037ddc.bbf4a2",
+        "x": 870,
+        "y": 1580,
+        "wires": [
+            [
+                "bad797d0.4bdb08",
+                "a46243e4.6a6ea"
+            ]
+        ]
+    },
+    {
+        "id": "bad797d0.4bdb08",
+        "type": "function",
+        "z": "e037ddc.bbf4a2",
+        "name": "Query",
+        "func": "let q = { payload: [\n    { \n        user: msg.payload\n    },\n    { forceServerObjectId: true }\n]};\nreturn q;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1030,
+        "y": 1580,
+        "wires": [
+            [
+                "c40ad5b8.ab1478"
+            ]
+        ]
+    },
+    {
+        "id": "c40ad5b8.ab1478",
+        "type": "mongodb3 in",
+        "z": "e037ddc.bbf4a2",
+        "service": "_ext_",
+        "configNode": "9b97ee84.83a28",
+        "name": "insert",
+        "collection": "LockUsers",
+        "operation": "insertOne",
+        "x": 1150,
+        "y": 1580,
+        "wires": [
+            [
+                "9abdc2cf.eac23"
+            ]
+        ]
+    },
+    {
+        "id": "e0f4e63f.acec48",
+        "type": "inject",
+        "z": "e037ddc.bbf4a2",
+        "name": "JSON",
+        "topic": "",
+        "payload": "{\"name\":\"Teddy\",\"code\":\"1234\",\"code_enabled\":false,\"onetime\":true,\"allow_when_home\":true,\"set_start\":false,\"set_end\":false,\"schedule\":false,\"restrict_hours\":false,\"start_time\":0,\"end_time\":0}",
+        "payloadType": "json",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 1560,
+        "wires": [
+            [
+                "7ae82c2d.517514"
+            ]
+        ]
+    },
+    {
+        "id": "ee2612d3.4d78f",
+        "type": "debug",
+        "z": "4c9161c6.7a8fe",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 750,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "60f99ec2.7a21d",
+        "type": "debug",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 630,
+        "y": 1620,
+        "wires": []
+    },
+    {
+        "id": "172c492f.6a6d97",
+        "type": "debug",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 630,
+        "y": 1480,
+        "wires": []
+    },
+    {
+        "id": "9af8159.d2befe8",
+        "type": "change",
+        "z": "e037ddc.bbf4a2",
+        "name": "Move user",
+        "rules": [
+            {
+                "t": "move",
+                "p": "user",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 1580,
+        "wires": [
+            [
+                "a2eac1f6.df588"
+            ]
+        ]
+    },
+    {
+        "id": "b341aba2.6b7618",
+        "type": "debug",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 1270,
+        "y": 1640,
+        "wires": []
+    },
+    {
+        "id": "9abdc2cf.eac23",
+        "type": "debug",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 1270,
+        "y": 1580,
+        "wires": []
+    },
+    {
+        "id": "58c70ad3.ada084",
+        "type": "debug",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 770,
+        "y": 1480,
+        "wires": []
+    },
+    {
+        "id": "bb10b6ed.ad1678",
+        "type": "change",
+        "z": "cd3e33e6.2da5b",
+        "name": "Prep (old)",
+        "rules": [
+            {
+                "t": "set",
+                "p": "search_code",
+                "pt": "msg",
+                "to": "payload.code",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 160,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "13230cd7.c0c513",
+        "type": "inject",
+        "z": "593fb5af.ec311c",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 220,
+        "y": 1840,
+        "wires": [
+            [
+                "dacdc60c.c7c2a8"
+            ]
+        ]
+    },
+    {
+        "id": "dacdc60c.c7c2a8",
+        "type": "subflow:cd3e33e6.2da5b",
+        "z": "593fb5af.ec311c",
+        "name": "",
+        "env": [],
+        "x": 360,
+        "y": 1840,
+        "wires": [
+            [
+                "c34f6c15.8034a"
+            ]
+        ]
+    },
+    {
+        "id": "c34f6c15.8034a",
+        "type": "debug",
+        "z": "593fb5af.ec311c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 490,
+        "y": 1840,
+        "wires": []
+    },
+    {
+        "id": "a7bd2b67.78f058",
+        "type": "comment",
+        "z": "b8e924ca.5a2238",
+        "name": "*** Notes ***",
+        "info": "Accepts a name as the msg.payload.\n\nIf found, returns the object.",
+        "x": 110,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "f4aea1ce.7e11",
+        "type": "change",
+        "z": "e037ddc.bbf4a2",
+        "name": "Move hash & user",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.hashed",
+                "pt": "msg",
+                "to": "key",
+                "tot": "msg"
+            },
+            {
+                "t": "move",
+                "p": "user",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 650,
+        "y": 1540,
+        "wires": [
+            [
+                "73c87aed.1865d4",
+                "58c70ad3.ada084"
+            ]
+        ]
+    },
+    {
+        "id": "7ae82c2d.517514",
+        "type": "change",
+        "z": "e037ddc.bbf4a2",
+        "name": "Query",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload",
+                "pt": "msg",
+                "to": "user",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "user.name",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 230,
+        "y": 1560,
+        "wires": [
+            [
+                "43c73954.73af78"
+            ]
+        ]
+    },
+    {
+        "id": "5a0d9a7.ea31c64",
+        "type": "function",
+        "z": "e037ddc.bbf4a2",
+        "name": "Query",
+        "func": "msg.payload = [\n    { \"user\": msg.key },\n    { $set: {\"user\": msg.payload} }\n];\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1030,
+        "y": 1540,
+        "wires": [
+            [
+                "403ca5aa.ba0acc"
+            ]
+        ]
+    },
+    {
+        "id": "73c87aed.1865d4",
+        "type": "subflow:bae968bd.7a3cb8",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "x": 870,
+        "y": 1540,
+        "wires": [
+            [
+                "5a0d9a7.ea31c64"
+            ]
+        ]
+    },
+    {
+        "id": "403ca5aa.ba0acc",
+        "type": "mongodb3 in",
+        "z": "e037ddc.bbf4a2",
+        "service": "_ext_",
+        "configNode": "9b97ee84.83a28",
+        "name": "update",
+        "collection": "LockUsers",
+        "operation": "updateOne",
+        "x": 1150,
+        "y": 1540,
+        "wires": [
+            [
+                "9679e89e.1ea758"
+            ]
+        ]
+    },
+    {
+        "id": "9679e89e.1ea758",
+        "type": "debug",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 1270,
+        "y": 1540,
+        "wires": []
+    },
+    {
+        "id": "23d0292e.7e7756",
+        "type": "subflow:b8e924ca.5a2238",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "x": 480,
+        "y": 1980,
+        "wires": [
+            [
+                "da3749ec.3bb548"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "cc9aff9f.e4692",
+        "type": "inject",
+        "z": "e037ddc.bbf4a2",
+        "name": "JSON",
+        "topic": "",
+        "payload": "Ted",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 330,
+        "y": 1980,
+        "wires": [
+            [
+                "23d0292e.7e7756",
+                "ae3ad5c1.fe2c38"
+            ]
+        ]
+    },
+    {
+        "id": "da3749ec.3bb548",
+        "type": "debug",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 650,
+        "y": 1980,
+        "wires": []
+    },
+    {
+        "id": "e65b24ce.9f02f8",
+        "type": "debug",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 650,
+        "y": 2040,
+        "wires": []
+    },
+    {
+        "id": "4854e7b9.2a28d8",
+        "type": "change",
+        "z": "e037ddc.bbf4a2",
+        "name": "Prep query",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 190,
+        "y": 2120,
+        "wires": [
+            [
+                "5139c093.c1f71"
+            ]
+        ]
+    },
+    {
+        "id": "5139c093.c1f71",
+        "type": "mongodb3 in",
+        "z": "e037ddc.bbf4a2",
+        "service": "_ext_",
+        "configNode": "9b97ee84.83a28",
+        "name": "Get users",
+        "collection": "LockUsers",
+        "operation": "find.toArray",
+        "x": 340,
+        "y": 2120,
+        "wires": [
+            [
+                "a5785778.858188"
+            ]
+        ]
+    },
+    {
+        "id": "a5785778.858188",
+        "type": "subflow:56145c0c.026bc4",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "env": [],
+        "x": 500,
+        "y": 2120,
+        "wires": [
+            [
+                "6fb67b38.7f7724",
+                "402b8b3e.f72234"
+            ]
+        ]
+    },
+    {
+        "id": "6fb67b38.7f7724",
+        "type": "switch",
+        "z": "e037ddc.bbf4a2",
+        "name": "Use encryption?",
+        "property": "use_encryption",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 680,
+        "y": 2120,
+        "wires": [
+            [
+                "d17c9250.8c8e6"
+            ],
+            [
+                "66c3cd7d.df3254"
+            ]
+        ]
+    },
+    {
+        "id": "93dba0b2.97f76",
+        "type": "subflow:43717449.df2fbc",
+        "z": "e037ddc.bbf4a2",
+        "x": 1150,
+        "y": 2120,
+        "wires": [
+            [
+                "555e11dd.ffccc",
+                "dd462e06.af205"
+            ]
+        ]
+    },
+    {
+        "id": "6a884b2e.615524",
+        "type": "change",
+        "z": "e037ddc.bbf4a2",
+        "name": "Set payload",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.user",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 970,
+        "y": 2120,
+        "wires": [
+            [
+                "93dba0b2.97f76"
+            ]
+        ]
+    },
+    {
+        "id": "d17c9250.8c8e6",
+        "type": "split",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 830,
+        "y": 2120,
+        "wires": [
+            [
+                "6a884b2e.615524"
+            ]
+        ]
+    },
+    {
+        "id": "555e11dd.ffccc",
+        "type": "join",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "mode": "auto",
+        "build": "string",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": "false",
+        "timeout": "",
+        "count": "",
+        "reduceRight": false,
+        "x": 1310,
+        "y": 2120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "66c3cd7d.df3254",
+        "type": "link out",
+        "z": "e037ddc.bbf4a2",
+        "name": "Call return user records",
+        "links": [
+            "f6e8edc7.e28f"
+        ],
+        "x": 795,
+        "y": 2160,
+        "wires": []
+    },
+    {
+        "id": "909f447c.7d8a78",
+        "type": "inject",
+        "z": "e037ddc.bbf4a2",
+        "name": "JSON",
+        "topic": "",
+        "payload": "Ted",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 130,
+        "y": 2060,
+        "wires": [
+            [
+                "4854e7b9.2a28d8"
+            ]
+        ]
+    },
+    {
+        "id": "402b8b3e.f72234",
+        "type": "debug",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 650,
+        "y": 2160,
+        "wires": []
+    },
+    {
+        "id": "dd462e06.af205",
+        "type": "debug",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 1310,
+        "y": 2160,
+        "wires": []
+    },
+    {
+        "id": "31a248ea.a1aec8",
+        "type": "subflow:43717449.df2fbc",
+        "z": "e037ddc.bbf4a2",
+        "x": 430,
+        "y": 2280,
+        "wires": [
+            [
+                "a941aade.7720f8"
+            ]
+        ]
+    },
+    {
+        "id": "22120c1f.f60064",
+        "type": "inject",
+        "z": "e037ddc.bbf4a2",
+        "name": "JSON",
+        "topic": "",
+        "payload": "U2FsdGVkX19w9nvWw3K4vreyJcQv8EurHr+quJKEykw=",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 230,
+        "y": 2280,
+        "wires": [
+            [
+                "31a248ea.a1aec8"
+            ]
+        ]
+    },
+    {
+        "id": "a941aade.7720f8",
+        "type": "debug",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 630,
+        "y": 2280,
+        "wires": []
+    },
+    {
+        "id": "cfcea17d.abb36",
+        "type": "subflow:43717449.df2fbc",
+        "z": "e037ddc.bbf4a2",
+        "x": 430,
+        "y": 2320,
+        "wires": [
+            [
+                "db4ed341.4831b"
+            ]
+        ]
+    },
+    {
+        "id": "b4118fbd.8dcea",
+        "type": "inject",
+        "z": "e037ddc.bbf4a2",
+        "name": "JSON",
+        "topic": "",
+        "payload": "U2FsdGVkX1+d+Af6m1Ot/23oLKxWCLlJ9kIlj0I3jobX/45MrbyBi62mySwdVSDqFtGD/u5CDlAlc8EfXvTDIPX2vdNqdPD0GkeAJrRx6FjIvCDttHGDt2lzgVr5CARcAfYRsjeVlJA+uoMPcF3N64ONRouawZo8YDbZBWPKuTn+WGjPEV8DCmyPyfT/F114zV4gfKq3TMbi1KLPHnj6wLxz+QcZUwr4Zq25m3MvS7TgVIVbcYvLTBRreNCwjp0aX+e0Jxtkd8dUYLhZC86FczSZwUvkgIo8YSiVMU+0IdJxvw36WHvoEZLJKlNKf+FLrWuki7h/2IUggNlx/WSGbV0UujQ/OkLOtXPv3FOSqnP2g8nF8/k9813eH4xAKjqWGat/L3IqCqT/pzDyEXN9vw==",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 230,
+        "y": 2320,
+        "wires": [
+            [
+                "cfcea17d.abb36"
+            ]
+        ]
+    },
+    {
+        "id": "db4ed341.4831b",
+        "type": "debug",
+        "z": "e037ddc.bbf4a2",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 630,
+        "y": 2320,
+        "wires": []
+    },
+    {
+        "id": "a46243e4.6a6ea",
+        "type": "subflow:43717449.df2fbc",
+        "z": "e037ddc.bbf4a2",
+        "x": 1070,
+        "y": 1640,
+        "wires": [
+            [
+                "b341aba2.6b7618"
+            ]
         ]
     }
 ]
