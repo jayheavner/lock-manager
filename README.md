@@ -33,6 +33,72 @@ services:
       - '27017:27017'
 ```
 
+1. Clone the repo
+```
+git clone git@github.com:jayheavner/lock-manager.git
+```
+2. Bring up the container. This will create the default node-red files not in source control.
+
+   ```
+   docker-compose up -d
+   ```
+3. Add project dependencies.
+
+   Start an interactive shell `docker-exec -it lock-manager /bin/bash` and run the following commands
+   ```
+   cd /data
+   npm i --save crypto-js moment lodash
+   exit
+   ```
+4. Add dependencies to settings.js file.
+
+   Under the *functionGlobalContext* section add the following...
+   ```
+   cryptojs: require('crypto-js'),
+   lodash: require('lodash'),
+   moment: require('moment')
+   ```
+5. Add packages to node-red palette.
+
+   Click the hamburger menu in the top-right corner, click 'Manage palette', click the 'Install' tab. Find the package and install.
+    -	node-red-contrib-mongodb3
+    -	node-red-dashboard
+    -	node-red-node-ui_list
+    -	node-red-contrib-home-assistant-websocket
+    -	node-red-contrib-credentials
+
+6. Restart node-red
+
+   ```
+   docker-compose restart lock-manager
+   ```
+   
+7. Add salt for encryption.
+   - Open node-red.
+   - Click the encryption tab.
+   - Double-click the *Put encryption key in global context* node
+   - enter the salt value in the first box
+   
+   **_DON'T LOSE THIS VALUE OR YOU WILL NOT BE ABLE TO DECRYPT YOUR DATA!!!. STORE IT SOMEWHERE SAFE OR USE A SALT YOU CAN REMEMBER._**
+
+8. Udate the Home Assistant configuration node.
+
+   - Open the *Configuration nodes*
+   - Find and double-click the *Home Assistant* node
+   - Enter your home assistant url and Access Token. To generate a long-lived access token,. go to your profile in Home Assistant, scroll to the botton, and click the *Create token* under the *Long-Lived Access Tokens* section.
+
+
+I'm specifying a credentialSecret. See the settings.js.example. Don't add anything under functionGlobalContext yet as the dependencies have to be installed first.
+3. Start the container. docker-compose up -d. If you were to browse to the instance you'd see errors, let's fix those.
+4. Start an interactive shell 
+5. Install dependencies.
+    - cd /data
+  - npm i --save crypto-js moment lodash
+  - exit shell
+  - update .config.json or add dependencies manually
+  - enter an encryption key. Encryption tab. Keep this safe!
+  - update home assistant configuration node
+  - add dependencies to functionGlobalContext
 1. Add auth to settings.js - Find the adminAuth section in settings.js. Add the username and generate a hashed password. See the [node-red documentation](https://nodered.org/docs/user-guide/runtime/securing-node-red) for more info.
 ```
 adminAuth: {
