@@ -1,10 +1,12 @@
 # lock-manager
 z-wave lock manager for home assistant built on node-red using docker.
 
+## Purpose
+Home Assistant doesn't have integrated lock management. I was using a paid app from RBoy when I was managing it using SmartThings. I've seen (and expiremented) with *pure* Home Assistant implementations but I don't like using Home Assistant for state management and the input variables required to make it work created a lot of noise. Also, YAML is not intuitive to try and write functionality for me. When I started this I thought it would be simple and a couple hours of work. It's grown and grown.
 # Installation
-I'm using Docker and Docker Compose. It's not required. You could simply import the flow, add the palette packages, and make the changes to the settings.
+I'm using Docker and Docker Compose. It's not required but the instructions are written for it.
 
-Here is a sample docker-compose.yml file. Note: I'm actually spinning up two node-red instances; one is for web end-points and automations and the other is strictly for this ui. I'm changing the exposed port on the second instance. See the note about security for my rationale.
+Here is a sample docker-compose.yml fragment. 
 
 ```
 version: '3.6'
@@ -54,7 +56,7 @@ git clone git@github.com:jayheavner/lock-manager.git
 
 5. Edit the settings.js file
 
-   Three sections need to be changed
+   Three sections need to be changed *this is technically optional but highly recommended*
    - credentialSecret - Key that node-red uses to encrypt. If not specified it will create one and store in
    .config.json but better to create your own. You can use any random string.
    - adminAuth - Secures the node-red backend. Add the username and generate a hashed password. See the [node-red documentation](https://nodered.org/docs/user-guide/runtime/securing-node-red) for more info.
@@ -68,66 +70,29 @@ git clone git@github.com:jayheavner/lock-manager.git
    ```
    http://<ip>:1880
    ```
-   Add salt for encryption.
-    - Click the encryption tab.
-    - Double-click the *Put encryption key in global context* node
-    - Enter the salt value in the first box
-    - Click *Done*
+   - Add salt for encryption.
+     - Click the encryption tab.
+     - Double-click the *Put encryption key in global context* node
+     - Enter the salt value in the first box
+     - Click *Done*
+    
    **_DON'T LOSE THIS VALUE OR YOU WILL NOT BE ABLE TO DECRYPT YOUR DATA!!!. STORE IT SOMEWHERE SAFE OR USE A VALUE YOU CAN REMEMBER._**
 
-8. Udate the Home Assistant configuration node.
+   - Udate the Home Assistant configuration node.
+     - Open the *Configuration nodes*
+     - Find and double-click the *Home Assistant* node
+     - Enter your home assistant url and Access Token. To generate a long-lived access token,. go to your profile in Home Assistant, scroll to the botton, and click the *Create token* under the *Long-Lived Access Tokens* section.
+     - Click *Done*
 
-   - Open the *Configuration nodes*
-   - Find and double-click the *Home Assistant* node
-   - Enter your home assistant url and Access Token. To generate a long-lived access token,. go to your profile in Home Assistant, scroll to the botton, and click the *Create token* under the *Long-Lived Access Tokens* section.
+8. Deploy
 
-
-I'm specifying a credentialSecret. See the settings.js.example. Don't add anything under functionGlobalContext yet as the dependencies have to be installed first.
-3. Start the container. docker-compose up -d. If you were to browse to the instance you'd see errors, let's fix those.
-4. Start an interactive shell 
-5. Install dependencies.
-    - cd /data
-  - npm i --save crypto-js moment lodash
-  - exit shell
-  - update .config.json or add dependencies manually
-  - enter an encryption key. Encryption tab. Keep this safe!
-  - update home assistant configuration node
-  - add dependencies to functionGlobalContext
-1. Add auth to settings.js - Find the adminAuth section in settings.js. Add the username and generate a hashed password. See the [node-red documentation](https://nodered.org/docs/user-guide/runtime/securing-node-red) for more info.
-```
-adminAuth: {
-  type: 'credentials',
-  users: [
-    {
-      username: 'my user',
-      password: '<password hash>',
-      permissions: '*'
-    }
-  ]
-},
-```
-
-2. Add the following packages to palette. Hamburger menu in the top-right corner, 'Manage palette', click the 'Install' tab. Find the package and install. *Restart node-red once everything has been installed*
-    -	node-red-contrib-mongodb3
-    -	node-red-dashboard
-    -	node-red-node-ui_list
-    -	node-red-contrib-home-assistant-websocket
-    -	node-red-contrib-credentials
-
-3. Import the flow.
-4. Update Home Assistant Configuration node. *Note: The node must be authorized. Currently, the preferred way is to generate/use a long living access token in HA under user profile and enter it in the settings.*
-5. Install missing npm packages. This project is using crypto-js, moment, and lodash. To install, get to a bash prompt and navigate to the working folder and type `npm install --save`. It should pull from packages.json. If not, `npm install --save crypto-js moment lodash`.
-6. Add these packages to setting.js. Find the functionGlobalContext section in settings.js and add the following.
-  ```
-    cryptojs: require('crypto-js'),
-    lodash: require('lodash'),
-    moment: require('moment'),
-  ```
-5. Spacers are missing from layout. Fix.
+9. Open the web ui interface
+   ```
+   http://<ip>:1880/ui
 
 ## DB – Info
 Three Mongo collections are created.
-1.	LockManager – Contains user and schedule information
+1.	LockUsers – Contains user and schedule information
 2.	LockSlots – Maps physical door lock slots to users
 3.	LockLog – Logs events
 
@@ -186,9 +151,9 @@ log_manual_unlock - writes manual lock activities to log.
 keep_log_days - number of days to keep log data. Older data is removed.
 ```
 ## Security
-Node-red UI is not secure by default. It can be secured in the settings **but** that means any requests to node-red are secured. I've got end-points setup for Oauth callbacks that I didn't want to secure. That leaves two options.
-
-1. Spin up another instance of node-red and secure the UI in that instance.
-2. Build some ghetto hack to secure the front end.
-
-I'm using the first option but I've included my *hack* which is a keypad that prevents usage until a code (defined in variables) is entered. The only problem with this is that it's server side which isn't terribly effective (if it's unlocked, it's unlocked for everyone until it relocks). There's a time-out (also defined in variables) that relocks the interface. TO-DO Look at better ways to provide alternate security.
+Given that this tool manages locks which gain access to one's home, security is important. I stronly recommend using all of the built in security features. There are two additional security features that can be enabled through the settings.
+  - use_encrytion - Encrypts data in the LockUsers table so if someone gains access to your database they won't be able to see users and codes.
+  - use_keypad - Enforces additional security by requiring a pin before gaining access.
+  
+## Other
+I am using a second instance of node-red for the lock manager. It ended up being a lot bigger than anticipated and I wanted to secure it separately from my normal node-red instance. If you don't have that option (or desire) you could simplify a lot of it by stripping out the encryption and logging. I plan to build a stripped down version more appropriate for importing into an existing node-red instance.
