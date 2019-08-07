@@ -32,7 +32,7 @@ module.exports = {
     //  ]
     //},
   
-    //httpNodeAuth: {user:"<user>",pass:"<hashed password>"},
+    //httpNodeAuth: { user: "<user>", pass: "<hashed password>" },
     functionGlobalContext: {
        cryptojs: require('crypto-js'),
        lodash: require('lodash'),
