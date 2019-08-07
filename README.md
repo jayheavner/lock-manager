@@ -38,49 +38,42 @@ services:
 ```
 git clone git@github.com:jayheavner/lock-manager.git
 ```
-2. Bring up the container. This will create the default node-red files not in source control.
+2. Navigate to the directory
+   ```
+   cd lock-manager
+   ```
 
+3. Install dependent packages
+   ```
+   npm i --save
+
+4. Copy the settings.js.example file to settings.js
+   ```
+   sudo cp settings.js.example settings.js
+   ```
+
+5. Edit the settings.js file
+
+   Three sections need to be changed
+   - credentialSecret - Key that node-red uses to encrypt. If not specified it will create one and store in
+   .config.json but better to create your own. You can use any random string.
+   - adminAuth - Secures the node-red backend. Add the username and generate a hashed password. See the [node-red documentation](https://nodered.org/docs/user-guide/runtime/securing-node-red) for more info.
+   - httpNodeAuth - Secures the /ui interface. See the documentation.
+   
+6. Bring up the container.
    ```
    docker-compose up -d
    ```
-3. Add project dependencies.
-
-   Start an interactive shell `docker-exec -it lock-manager /bin/bash` and run the following commands
+7. Navigate to the instance and finish setup.
    ```
-   cd /data
-   npm i --save crypto-js moment lodash
-   exit
+   http://<ip>:1880
    ```
-4. Add dependencies to settings.js file.
-
-   Under the *functionGlobalContext* section add the following...
-   ```
-   cryptojs: require('crypto-js'),
-   lodash: require('lodash'),
-   moment: require('moment')
-   ```
-5. Add packages to node-red palette.
-
-   Click the hamburger menu in the top-right corner, click 'Manage palette', click the 'Install' tab. Find the package and install.
-    -	node-red-contrib-mongodb3
-    -	node-red-dashboard
-    -	node-red-node-ui_list
-    -	node-red-contrib-home-assistant-websocket
-    -	node-red-contrib-credentials
-
-6. Restart node-red
-
-   ```
-   docker-compose restart lock-manager
-   ```
-   
-7. Add salt for encryption.
-   - Open node-red.
-   - Click the encryption tab.
-   - Double-click the *Put encryption key in global context* node
-   - enter the salt value in the first box
-   
-   **_DON'T LOSE THIS VALUE OR YOU WILL NOT BE ABLE TO DECRYPT YOUR DATA!!!. STORE IT SOMEWHERE SAFE OR USE A SALT YOU CAN REMEMBER._**
+   Add salt for encryption.
+    - Click the encryption tab.
+    - Double-click the *Put encryption key in global context* node
+    - Enter the salt value in the first box
+    - Click *Done*
+   **_DON'T LOSE THIS VALUE OR YOU WILL NOT BE ABLE TO DECRYPT YOUR DATA!!!. STORE IT SOMEWHERE SAFE OR USE A VALUE YOU CAN REMEMBER._**
 
 8. Udate the Home Assistant configuration node.
 
