@@ -34,9 +34,9 @@ module.exports = {
   
     //httpNodeAuth: {user:"<user>",pass:"<hashed password>"},
     functionGlobalContext: {
-    //   cryptojs: require('crypto-js'),
-    //   lodash: require('lodash'),
-    //   moment: require('moment')
+       cryptojs: require('crypto-js'),
+       lodash: require('lodash'),
+       moment: require('moment')
     },
     exportGlobalContextKeys: false,
   
