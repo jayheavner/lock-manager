@@ -1,15 +1,16 @@
 # lock-manager
-z-wave lock manager for home assistant built on node-red using docker
+z-wave lock manager for home assistant built on node-red using docker.
 
 # Installation
 I'm using Docker and Docker Compose. It's not required. You could simply import the flow, add the palette packages, and make the changes to the settings.
 
 Here is a sample docker-compose.yml file. Note: I'm actually spinning up two node-red instances; one is for web end-points and automations and the other is strictly for this ui. I'm changing the exposed port on the second instance. See the note about security for my rationale.
 
-```version: '3.6'
+```
+version: '3.6'
 services:
-  node-red-ui:
-    container_name: node-red-ui
+  lock-manager:
+    container_name: lock-manager
     restart: always
     image: nodered/node-red-docker:v10
     user: 'root:root'
