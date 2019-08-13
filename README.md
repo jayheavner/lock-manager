@@ -153,6 +153,8 @@ log_manual_unlock - writes manual lock activities to log.
 
 log_user_changes - logs create, update, delete activities. *Note: masks code if use_encryption is true*
 
+log_scheduled_changes - logs activities based on schedule. Also, logs one-time code usage.
+
 keep_log_days - number of days to keep log data. Older data is removed.
 ```
 ## Security
