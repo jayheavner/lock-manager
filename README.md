@@ -83,6 +83,9 @@ git clone git@github.com:jayheavner/lock-manager.git
      - Find and double-click the *Home Assistant* node
      - Enter your home assistant url and Access Token. To generate a long-lived access token,. go to your profile in Home Assistant, scroll to the botton, and click the *Create token* under the *Long-Lived Access Tokens* section.
      - Click *Done*
+     
+   *Sometimes these nodes need to be opened and closed and redeployed at least once to work. I don't know why that is. If you see
+   errors in node-red, try this.*
 
 8. Deploy
 
@@ -147,6 +150,10 @@ STILL IN PROGRESS
 log_manual_lock - writes manual lock activities to log.
 
 log_manual_unlock - writes manual lock activities to log.
+
+log_user_changes - logs create, update, delete activities. *Note: masks code if use_encryption is true*
+
+log_scheduled_changes - logs activities based on schedule. Also, logs one-time code usage.
 
 keep_log_days - number of days to keep log data. Older data is removed.
 ```
