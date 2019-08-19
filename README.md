@@ -1,5 +1,6 @@
 # lock-manager
 z-wave lock manager for home assistant built on node-red using docker.
+
 _Note: This is very much in beta. Use the slot offset to protect codes that are important enough that you wouldn't want them deleted._
 
 ## Purpose
