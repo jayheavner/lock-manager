@@ -170,3 +170,11 @@ Given that this tool manages locks which gain access to one's home, security is 
   
 ## Other
 I am using a second instance of node-red for the lock manager. I used node-red for a lot of stuff and I have several instances running. If you don't have the option (or desire) to run multiple instances, you could simplify a lot of it by stripping out the encryption, db, and logging and just importing the flow. I plan to build a stripped-down version more appropriate for importing into an existing node-red instance.
+
+## TO-DO
+ - [ ] Truncate loggging
+ - [ ] onfirm all logging flags are logging
+ - [ ] Disable overnight flag
+ - [ ] Disable on vacation flag
+ - [ ] Update immediately on Save (don't wait for schedule to pick up changes)
+ - [ ] Handle moving from decrypted to encrypted and back
