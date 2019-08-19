@@ -2,7 +2,7 @@
 z-wave lock manager for home assistant built on node-red using docker.
 
 ## Purpose
-Home Assistant doesn't have integrated lock management. I was using a paid app from RBoy when I was managing it using SmartThings. I've seen (and expiremented) with *pure* Home Assistant implementations but I don't like using Home Assistant for state management and the input variables required to make it work created a lot of noise. Also, YAML is not intuitive to try and write functionality for me. When I started this I thought it would be simple and a couple hours of work. It's grown and grown.
+Home Assistant doesn't have integrated lock management. I was using a paid app from RBoy when I was managing it using SmartThings. I've seen (and experimented) with *pure* Home Assistant implementations but I don't like using Home Assistant for state management and the input variables required to make it work created a lot of noise. Also, YAML is not intuitive to try and write functionality for me. When I started this I thought it would be simple and a couple hours of work. It's grown and grown.
 # Installation
 I'm using Docker and Docker Compose. It's not required but the instructions are written for it.
 
@@ -78,7 +78,7 @@ git clone git@github.com:jayheavner/lock-manager.git
     
    **_DON'T LOSE THIS VALUE OR YOU WILL NOT BE ABLE TO DECRYPT YOUR DATA!!!. STORE IT SOMEWHERE SAFE OR USE A VALUE YOU CAN REMEMBER._**
 
-   - Udate the Home Assistant configuration node.
+   - Update the Home Assistant configuration node.
      - Open the *Configuration nodes*
      - Find and double-click the *Home Assistant* node
      - Enter your home assistant url and Access Token. To generate a long-lived access token,. go to your profile in Home Assistant, scroll to the botton, and click the *Create token* under the *Long-Lived Access Tokens* section.
@@ -106,7 +106,7 @@ Three Mongo collections are created.
 There is a node named 'Variables' that sets all the variables used. Eventually, I will move some of this into a settings page. 
 
 ```This sets all variables that would otherwise be 
-hard-coded into global/flow for use.
+hard coded into global/flow for use.
 
 use_keypad - (boolean) true uses the keypad, false does not.
 
@@ -131,7 +131,7 @@ slot_offset_users - JSON array of users to handle the slot offsets. An example w
 --why is this here? During testing I didn't want to mess with the important codes my family uses day-to-day.
 
 devices_for_home - array of entity_id to check for home/away. 
-Any device home is considered some_home, all devices home is considered all_home, all devices aways is considered all_away.
+Any device home is considered some_home, all devices home is considered all_home, all devices away is considered all_away.
 This is for 'allow when home' checks but could be expanded.
 
 notify_devices - JSON array of devices to receive notifications. Example: ['notify.ios_my_iphone']
@@ -148,7 +148,7 @@ use_encryption - specifies whether or not to encrypt the codes in the db.
 
 disable_all_codes_when_asleep - clears all codes, except slot codes, while sleeping. 
 
-use_clearcode - uses the lock.clear_usercode.This is **NOT** supported in Home Assistant without some work. System will always overwrite
+use_clearcode - uses the lock.clear_usercode. This is **NOT** supported in Home Assistant without some work. System will always overwrite
 codes with a random code but if this is true it will take the extra step of trying to clear the lock slot.
 
 STILL IN PROGRESS
@@ -164,9 +164,9 @@ keep_log_days - number of days to keep log data. Older data is removed.
 ```
 
 ## Security
-Given that this tool manages locks which gain access to one's home, security is important. I stronly recommend using all of the built in security features. There are two additional security features that can be enabled through the settings.
+Given that this tool manages locks which gain access to one's home, security is important. I strongly recommend using all of the built in security features. There are two additional security features that can be enabled through the settings.
   - use_encrytion - Encrypts data in the LockUsers table so if someone gains access to your database they won't be able to see users and codes.
   - use_keypad - Enforces additional security by requiring a pin before gaining access.
   
 ## Other
-I am using a second instance of node-red for the lock manager. It ended up being a lot bigger than anticipated and I wanted to secure it separately from my normal node-red instance. If you don't have that option (or desire) you could simplify a lot of it by stripping out the encryption and logging. I plan to build a stripped down version more appropriate for importing into an existing node-red instance.
+I am using a second instance of node-red for the lock manager. I used node-red for a lot of stuff and I have several instances running. If you don't have the option (or desire) to run multiple instances, you could simplify a lot of it by stripping out the encryption, db, and logging and just importing the flow. I plan to build a stripped-down version more appropriate for importing into an existing node-red instance.
