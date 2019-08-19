@@ -1,5 +1,6 @@
 # lock-manager
 z-wave lock manager for home assistant built on node-red using docker.
+_Note: This is very much in beta. Use the slot offset to protect codes that are important enough that you wouldn't want them deleted._
 
 ## Purpose
 Home Assistant doesn't have integrated lock management. I was using a paid app from RBoy when I was managing it using SmartThings. I've seen (and experimented) with *pure* Home Assistant implementations but I don't like using Home Assistant for state management and the input variables required to make it work created a lot of noise. Also, YAML is not intuitive to try and write functionality for me. When I started this I thought it would be simple and a couple hours of work. It's grown and grown.
