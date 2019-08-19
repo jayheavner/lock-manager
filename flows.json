@@ -14,13 +14,6 @@
         "info": ""
     },
     {
-        "id": "593fb5af.ec311c",
-        "type": "tab",
-        "label": "Debugging",
-        "disabled": false,
-        "info": ""
-    },
-    {
         "id": "4c9161c6.7a8fe",
         "type": "tab",
         "label": "Form",
@@ -52,6 +45,13 @@
         "id": "e037ddc.bbf4a2",
         "type": "tab",
         "label": "Encryption",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "593fb5af.ec311c",
+        "type": "tab",
+        "label": "Debugging",
         "disabled": false,
         "info": ""
     },
@@ -874,7 +874,7 @@
         "type": "function",
         "z": "4d149fd1.afec5",
         "name": "Code found",
-        "func": "var _ = context.global.lodash;\nvar moment = context.global.moment;\n\nif (!_.isEmpty(msg.payload)) {\n    node.status({ fill: \"blue\", shape: \"dot\", text: `Disabling ${msg.user.name} at ${moment().format('M/D/YY h:mm a')}` });\n    return msg;\n}\n\nreturn [null, msg];\n",
+        "func": "const _ = context.global.lodash;\nconst moment = context.global.moment;\n\nif (!_.isEmpty(msg.payload)) {\n    node.status({ fill: \"blue\", shape: \"dot\", text: `Disabling ${msg.user.name} at ${moment().format('M/D/YY h:mm a')}` });\n    return msg;\n}\n\nreturn [null, msg];\n",
         "outputs": 2,
         "noerr": 0,
         "x": 490,
@@ -1041,11 +1041,11 @@
         "id": "4c5d80e5.0aeb4",
         "type": "function",
         "z": "eebb6675.799d48",
-        "name": "",
-        "func": "node.log(\"**************************\");\nnode.log(\"lock\");\nnode.log(JSON.stringify(msg, null, 2));\nnode.log(JSON.stringify(msg.payload));\nnode.log(\"**************************\");\nnode.log(\"\");\nreturn msg;",
+        "name": "console",
+        "func": "node.log(`\\n**************************\\nlock\\n\\n\n    ${JSON.stringify(msg, null, 2)}\\n\n    ${JSON.stringify(msg.payload)}\\n\n    **************************\\n\\n`);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 250,
+        "x": 260,
         "y": 80,
         "wires": [
             [
@@ -1058,11 +1058,11 @@
         "id": "a903e783.baa408",
         "type": "function",
         "z": "eebb6675.799d48",
-        "name": "",
-        "func": "node.log(\"**************************\");\nnode.log(\"deadbolt\");\nnode.log(JSON.stringify(msg, null, 2));\nnode.log(JSON.stringify(msg.payload));\nnode.log(\"**************************\");\nnode.log(\"\");\nreturn msg;",
+        "name": "console",
+        "func": "node.log(`\\n**************************\\ndeadbolt\\n\\n\n    ${JSON.stringify(msg, null, 2)}\\n\n    ${JSON.stringify(msg.payload)}\\n\n    **************************\\n\\n`);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 250,
+        "x": 260,
         "y": 140,
         "wires": [
             [
@@ -1074,11 +1074,11 @@
         "id": "ec48e612.419ef8",
         "type": "function",
         "z": "eebb6675.799d48",
-        "name": "",
-        "func": "node.log(\"**************************\");\nnode.log(\"alarm level\");\nnode.log(JSON.stringify(msg, null, 2));\nnode.log(JSON.stringify(msg.payload));\nnode.log(\"**************************\");\nnode.log(\"\");\nreturn msg;",
+        "name": "console",
+        "func": "node.log(`\\n**************************\\nalarm_level\\n\\n\n    ${JSON.stringify(msg, null, 2)}\\n\n    ${JSON.stringify(msg.payload)}\\n\n    **************************\\n\\n`);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 250,
+        "x": 260,
         "y": 200,
         "wires": [
             [
@@ -1090,11 +1090,11 @@
         "id": "5e9b9c38.42e2d4",
         "type": "function",
         "z": "eebb6675.799d48",
-        "name": "",
-        "func": "node.log(\"**************************\");\nnode.log(\"alarm type\");\nnode.log(JSON.stringify(msg, null, 2));\nnode.log(JSON.stringify(msg.payload));\nnode.log(\"**************************\");\nnode.log(\"\");\nreturn msg;",
+        "name": "console",
+        "func": "node.log(`\\n**************************\\nalarm_type\\n\\n\n    ${JSON.stringify(msg, null, 2)}\\n\n    ${JSON.stringify(msg.payload)}\\n\n    **************************\\n\\n`);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 250,
+        "x": 260,
         "y": 260,
         "wires": [
             [
@@ -1106,11 +1106,11 @@
         "id": "cf114afb.b5c1f8",
         "type": "function",
         "z": "eebb6675.799d48",
-        "name": "",
-        "func": "node.log(\"**************************\");\nnode.log(\"lock batteries\");\nnode.log(JSON.stringify(msg, null, 2));\nnode.log(JSON.stringify(msg.payload));\nnode.log(\"**************************\");\nnode.log(\"\");\nreturn msg;",
+        "name": "console",
+        "func": "node.log(`\\n**************************\\nlock batteries\\n\\n\n    ${JSON.stringify(msg, null, 2)}\\n\n    ${JSON.stringify(msg.payload)}\\n\n    **************************\\n\\n`);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 250,
+        "x": 260,
         "y": 320,
         "wires": [
             [
@@ -1170,7 +1170,7 @@
         "type": "function",
         "z": "eebb6675.799d48",
         "name": "Get slot user",
-        "func": "var status = msg.data.new_state.attributes.lock_status;\nif (status.indexOf('user') == -1) {\n    // not a user code\n    msg.payload = {\n        state: `Door ${msg.payload}`,\n        type: msg.data.new_state.attributes.notification,\n        status: `Door ${msg.data.new_state.attributes.lock_status}`,\n        time: msg.data.new_state.last_updated\n    };\n    return [null, msg];\n}\n\nconst slots = global.get(\"slots\");\nvar slot = Number(status.substring(status.lastIndexOf(' ') + 1));\n\nconst user = slots.find(u => u.slot === slot);\nif (user === undefined)\n    return [null, null, { payload: `Door was opened with a code that doesn't have a matching slot ${slot}. Good chance the lock.clear_usercode didn't work which means HA has probably been updated and I need to run the update zwave script` }];\n    \n\nvar m = {};\nm.user = user;\nm.slot = slot;\nm.slots = slots;\nm.status = msg.payload,\nm.payload = {\n    state: `Door ${msg.payload}`,\n    type: msg.data.new_state.attributes.notification,\n    og_status: msg.data.new_state.attributes.lock_status,\n    status: `${status.substring(0, status.indexOf('user') -  4)} by ${user.name}`,\n    time: msg.data.new_state.last_updated\n};\n\nreturn m;",
+        "func": "let status = msg.data.new_state.attributes.lock_status;\nif (status.indexOf('user') == -1) {\n    // not a user code\n    msg.payload = {\n        state: `Door ${msg.payload}`,\n        type: msg.data.new_state.attributes.notification,\n        status: `Door ${msg.data.new_state.attributes.lock_status}`,\n        time: msg.data.new_state.last_updated\n    };\n    return [null, msg];\n}\n\nconst slots = global.get(\"slots\");\nlet slot = Number(status.substring(status.lastIndexOf(' ') + 1));\n\nconst user = slots.find(u => u.slot === slot);\nif (user === undefined)\n    return [null, null, { payload: `Door was opened with a code that doesn't have a matching slot ${slot}. Good chance the lock.clear_usercode didn't work which means HA has probably been updated and I need to run the update zwave script` }];\n    \n\nlet m = {};\nm.user = user;\nm.slot = slot;\nm.slots = slots;\nm.status = msg.payload,\nm.payload = {\n    state: `Door ${msg.payload}`,\n    type: msg.data.new_state.attributes.notification,\n    og_status: msg.data.new_state.attributes.lock_status,\n    status: `${status.substring(0, status.indexOf('user') -  4)} by ${user.name}`,\n    time: msg.data.new_state.last_updated\n};\n\nreturn m;",
         "outputs": 3,
         "noerr": 0,
         "x": 610,
@@ -1467,7 +1467,7 @@
         "type": "function",
         "z": "4c9161c6.7a8fe",
         "name": "Populate",
-        "func": "global.set('user_type', 'Updated');\nvar rec = msg.payload;\nflow.set(\"name\", rec.name)\n\nreturn rec",
+        "func": "global.set('user_type', 'Updated');\nlet rec = msg.payload;\nflow.set(\"name\", rec.name)\n\nreturn rec",
         "outputs": 1,
         "noerr": 0,
         "x": 1260,
@@ -1484,7 +1484,7 @@
         "type": "function",
         "z": "4c9161c6.7a8fe",
         "name": "Build Days",
-        "func": "var selected = msg.days || [];\nflow.set(\"days\", msg.days);\nvar days = [{\"title\":\"Sunday\"},{\"title\":\"Monday\"},{\"title\":\"Tuesday\"},{\"title\":\"Wednesday\"},{\"title\":\"Thursday\"},{\"title\":\"Friday\"},{\"title\":\"Saturday\"}];\ndays.forEach(function(day) {\n    if (selected.indexOf(day.title) > -1)\n        day.isChecked = true;\n    else\n        day.isChecked = false;\n});\n\nmsg.enabled = flow.get(\"schedule\");\nmsg.payload = days;\nmsg.topic = \"Day\";\nreturn msg;\n\n",
+        "func": "let selected = msg.days || [];\nflow.set(\"days\", msg.days);\nlet days = [{\"title\":\"Sunday\"},{\"title\":\"Monday\"},{\"title\":\"Tuesday\"},{\"title\":\"Wednesday\"},{\"title\":\"Thursday\"},{\"title\":\"Friday\"},{\"title\":\"Saturday\"}];\ndays.forEach(function(day) {\n    if (selected.indexOf(day.title) > -1)\n        day.isChecked = true;\n    else\n        day.isChecked = false;\n});\n\nmsg.enabled = flow.get(\"schedule\");\nmsg.payload = days;\nmsg.topic = \"Day\";\nreturn msg;\n\n",
         "outputs": 1,
         "noerr": 0,
         "x": 270,
@@ -3477,7 +3477,7 @@
         "type": "function",
         "z": "4c9161c6.7a8fe",
         "name": "Validate Code",
-        "func": "if (msg.payload === '' || (msg.hasOwnProperty('enabled') && !msg.enabled)) {\n    node.status({ fill: \"red\", shape: \"dot\", text: \"invalid\" });\n    return [null, msg];\n}\n\nconst code_length = global.get(\"code_length\");  \n\nvar exp = new RegExp(`^\\\\d{${code_length}}$`);\nif (!exp.test(msg.payload)) {\n    msg.code = msg.payload;\n    msg.topic = \"Invalid Code\";\n    msg.payload = `Please enter a ${code_length}-digit numeric code.`;\n    node.status({ fill: \"red\", shape: \"dot\", text: \"validation error\" });\n    return [null, null, msg];\n}\n\nvar msg2 = {};\nnode.status({ fill: \"green\", shape: \"dot\", text: \"valid\" });\nmsg2.code = msg.payload;\n\nmsg2.payload =  [  \n    { $or: [{ name: flow.get(\"name\") }, { code: msg.payload }] }\n];\nreturn msg2;\n",
+        "func": "if (msg.payload === '' || (msg.hasOwnProperty('enabled') && !msg.enabled)) {\n    node.status({ fill: \"red\", shape: \"dot\", text: \"invalid\" });\n    return [null, msg];\n}\n\nconst code_length = global.get(\"code_length\");  \n\nconst exp = new RegExp(`^\\\\d{${code_length}}$`);\nif (!exp.test(msg.payload)) {\n    msg.code = msg.payload;\n    msg.topic = \"Invalid Code\";\n    msg.payload = `Please enter a ${code_length}-digit numeric code.`;\n    node.status({ fill: \"red\", shape: \"dot\", text: \"validation error\" });\n    return [null, null, msg];\n}\n\nlet msg2 = {};\nnode.status({ fill: \"green\", shape: \"dot\", text: \"valid\" });\nmsg2.code = msg.payload;\n\nmsg2.payload =  [  \n    { $or: [{ name: flow.get(\"name\") }, { code: msg.payload }] }\n];\nreturn msg2;\n",
         "outputs": 3,
         "noerr": 0,
         "x": 700,
@@ -3776,7 +3776,7 @@
         "type": "function",
         "z": "4c9161c6.7a8fe",
         "name": "Validate Fields",
-        "func": "var o = {};\no.name = flow.get(\"name\");\no.code = flow.get(\"code\");\no.code_enabled = flow.get(\"code_enabled\");\no.onetime = flow.get(\"onetime\");\no.allow_when_home = flow.get(\"allow_when_home\");\no.set_start = flow.get(\"set_start\");\no.set_end = flow.get(\"set_end\");\no.start_date = o.set_start ? flow.get(\"start_date\") : undefined;\no.end_date = o.set_end ? flow.get(\"end_date\") : undefined;\no.schedule = flow.get(\"schedule\");\no.days = flow.get(\"days\");\no.restrict_hours = flow.get(\"restrict_hours\")\no.start_time = flow.get(\"start_time\");\no.end_time = flow.get(\"end_time\");\n\nif (o.schedule && o.restricted_hours && o.start_time >= o.end_time) {\n    msg.payload = \"The end time must be later than the start time.\";\n    node.status({fill:\"red\",shape:\"dot\",text:\"validation error\"});\n    return [null, msg];\n} else if (o.set_start && o.set_end && o.start_date >= o.end_date) {\n    msg.payload = \"The end date must be later than the start date.\";\n    node.status({fill:\"red\",shape:\"dot\",text:\"validation error\"});\n    return [null, msg];\n} else {\nmsg.payload = o;\nnode.status({fill:\"green\",shape:\"dot\",text:\"valid\"});\nreturn msg;\n}\n",
+        "func": "let o = {};\no.name = flow.get(\"name\");\no.code = flow.get(\"code\");\no.code_enabled = flow.get(\"code_enabled\");\no.onetime = flow.get(\"onetime\");\no.allow_when_home = flow.get(\"allow_when_home\");\no.set_start = flow.get(\"set_start\");\no.set_end = flow.get(\"set_end\");\no.start_date = o.set_start ? flow.get(\"start_date\") : undefined;\no.end_date = o.set_end ? flow.get(\"end_date\") : undefined;\no.schedule = flow.get(\"schedule\");\no.days = flow.get(\"days\");\no.restrict_hours = flow.get(\"restrict_hours\")\no.start_time = flow.get(\"start_time\");\no.end_time = flow.get(\"end_time\");\n\nif (o.schedule && o.restricted_hours && o.start_time >= o.end_time) {\n    msg.payload = \"The end time must be later than the start time.\";\n    node.status({fill:\"red\",shape:\"dot\",text:\"validation error\"});\n    return [null, msg];\n} else if (o.set_start && o.set_end && o.start_date >= o.end_date) {\n    msg.payload = \"The end date must be later than the start date.\";\n    node.status({fill:\"red\",shape:\"dot\",text:\"validation error\"});\n    return [null, msg];\n} else {\nmsg.payload = o;\nnode.status({fill:\"green\",shape:\"dot\",text:\"valid\"});\nreturn msg;\n}\n",
         "outputs": 2,
         "noerr": 0,
         "x": 440,
@@ -3815,7 +3815,7 @@
         "type": "function",
         "z": "4c9161c6.7a8fe",
         "name": "Start Date",
-        "func": "var _ = context.global.lodash;\nvar moment = context.global.moment;\n\nmsg.enabled = msg.payload;\nmsg.set_start = msg.payload;\nflow.set(\"set_start\", msg.payload);\nmsg.payload = _.isEmpty(msg.start_date) ? moment().format('M/D/YY') : msg.start_date;\nreturn msg;\n",
+        "func": "const _ = context.global.lodash;\nconst moment = context.global.moment;\n\nmsg.enabled = msg.payload;\nmsg.set_start = msg.payload;\nflow.set(\"set_start\", msg.payload);\nmsg.payload = _.isEmpty(msg.start_date) ? moment().format('M/D/YY') : msg.start_date;\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "x": 560,
@@ -3831,7 +3831,7 @@
         "type": "function",
         "z": "4c9161c6.7a8fe",
         "name": "End Date",
-        "func": "var _ = context.global.lodash;\nvar moment = context.global.moment;\n\nmsg.enabled = msg.payload;\nmsg.set_end = msg.payload;\nflow.set(\"set_end\", msg.payload);\nmsg.payload = _.isEmpty(msg.end_date) ? moment().format('M/D/YY') : msg.end_date;\nreturn msg;\n",
+        "func": "const _ = context.global.lodash;\nconst moment = context.global.moment;\n\nmsg.enabled = msg.payload;\nmsg.set_end = msg.payload;\nflow.set(\"set_end\", msg.payload);\nmsg.payload = _.isEmpty(msg.end_date) ? moment().format('M/D/YY') : msg.end_date;\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "x": 560,
@@ -3920,7 +3920,7 @@
         "type": "function",
         "z": "4c9161c6.7a8fe",
         "name": "Set flow.days",
-        "func": "var daysOfWeek = [\"Sunday\", \"Monday\", \"Tuesday\", \"Wednesday\", \"Thursday\", \"Friday\", \"Saturday\"]; // array of days sorted\nvar days = flow.get(\"days\");\nnode.log(`Current days => ${days}`);\nif (days === undefined || !Array.isArray(days)) days = [];\nif (msg.payload.isChecked) {\n    var match = days.includes(msg.payload.title)\n    node.log(\"match = \" + match);\n    if (!match) days.push(msg.payload.title);\n} else {\n    var i = days.indexOf(msg.payload.title)\n    node.log(\"i = \" + i);\n    if (i >= 0) days.splice(i, 1);\n}\nnode.log(`New days => ${days}`);\n\nvar sorted = days.sort(sort);\nnode.log(`sorted days => ${sorted}`);\nflow.set(\"days\", sorted);\nmsg.payload = sorted;\nreturn msg;\n\nfunction sort(a, b){\n    return daysOfWeek.indexOf(a) - daysOfWeek.indexOf(b); // basic sort function that compares the indexes of the two days\n}\n",
+        "func": "const daysOfWeek = [\"Sunday\", \"Monday\", \"Tuesday\", \"Wednesday\", \"Thursday\", \"Friday\", \"Saturday\"]; // array of days sorted\nlet days = flow.get(\"days\");\nnode.log(`Current days => ${days}`);\nif (days === undefined || !Array.isArray(days)) days = [];\nif (msg.payload.isChecked) {\n    let match = days.includes(msg.payload.title)\n    node.log(\"match = \" + match);\n    if (!match) days.push(msg.payload.title);\n} else {\n    let i = days.indexOf(msg.payload.title)\n    node.log(\"i = \" + i);\n    if (i >= 0) days.splice(i, 1);\n}\nnode.log(`New days => ${days}`);\n\nlet sorted = days.sort(sort);\nnode.log(`sorted days => ${sorted}`);\nflow.set(\"days\", sorted);\nmsg.payload = sorted;\nreturn msg;\n\nfunction sort(a, b){\n    return daysOfWeek.indexOf(a) - daysOfWeek.indexOf(b); // basic sort function that compares the indexes of the two days\n}\n",
         "outputs": 1,
         "noerr": 0,
         "x": 770,
@@ -3994,7 +3994,7 @@
         "type": "function",
         "z": "4c9161c6.7a8fe",
         "name": "Build query",
-        "func": "let name = flow.get(\"name\");\n\nvar user = { \"payload\": name };\n\nreturn user;",
+        "func": "let name = flow.get(\"name\");\n\nlet user = { \"payload\": name };\n\nreturn user;",
         "outputs": 1,
         "noerr": 0,
         "x": 450,
@@ -4143,7 +4143,7 @@
         "type": "function",
         "z": "4d149fd1.afec5",
         "name": "Show/hide keypad",
-        "func": "var moment = context.global.moment;\n\nif (global.get(\"use_keypad\")) {\n    const displayed = global.get(\"keypad_displayed\") || false;\n    msg.displayed = displayed;\n    const passcode = global.get(\"passcode\") || '';\n    msg.passcode = passcode;\n    if (passcode === '' && !displayed) {\n        return {\n            payload: true,\n            topic: \"show\",\n            passcode: passcode,\n            keypad_displayed: displayed\n        };\n    }\n    \n    node.status({ fill: \"green\", shape:\"dot\", text: moment().format('MMM D h:mm a')} );\n    // TODO: fix this. Check to see if passcode is being used\n    global.set(\"passcode\", \"0000\");\n    return msg;\n} else {\n    node.status({ fill: \"red\", shape:\"dot\", text: 'keypad disabled'} );\n}",
+        "func": "const moment = context.global.moment;\n\nif (global.get(\"use_keypad\")) {\n    const displayed = global.get(\"keypad_displayed\") || false;\n    msg.displayed = displayed;\n    const passcode = global.get(\"passcode\") || '';\n    msg.passcode = passcode;\n    if (passcode === '' && !displayed) {\n        return {\n            payload: true,\n            topic: \"show\",\n            passcode: passcode,\n            keypad_displayed: displayed\n        };\n    }\n    \n    node.status({ fill: \"green\", shape:\"dot\", text: moment().format('MMM D h:mm a')} );\n    // TODO: fix this. Check to see if passcode is being used\n    global.set(\"passcode\", \"0000\");\n    return msg;\n} else {\n    node.status({ fill: \"red\", shape:\"dot\", text: 'keypad disabled'} );\n}",
         "outputs": 1,
         "noerr": 0,
         "x": 290,
@@ -4513,6 +4513,13 @@
             },
             {
                 "t": "set",
+                "p": "max_supported_slots",
+                "pt": "global",
+                "to": "30",
+                "tot": "num"
+            },
+            {
+                "t": "set",
                 "p": "slot_offset",
                 "pt": "global",
                 "to": "2",
@@ -4684,7 +4691,7 @@
         "type": "function",
         "z": "593fb5af.ec311c",
         "name": "build array",
-        "func": "var nums = [];\nfor (var i = 2; i < 30; i++)\n    nums.push(i);\nmsg.payload = nums;\nreturn msg;",
+        "func": "let nums = [];\nlet maxSlots = global.get('max_supported_slots');\nlet offset = global.get('slot_offset') + 1;\nfor (let i = offset; i <= maxSlots; i++)\n    nums.push(i);\nmsg.payload = nums;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 250,
@@ -4806,7 +4813,7 @@
         "type": "function",
         "z": "593fb5af.ec311c",
         "name": "build array",
-        "func": "var nums = [];\nfor (var i = 2; i < 30; i++)\n    nums.push(i);\nmsg.payload = nums;\nreturn msg;",
+        "func": "let nums = [];\nlet maxSlots = global.get('max_supported_slots');\nlet offset = global.get('slot_offset') + 1;\nfor (let i = offset; i <= maxSlots; i++)\n    nums.push(i);\nmsg.payload = nums;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 260,
@@ -5025,7 +5032,7 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 110,
-        "y": 900,
+        "y": 960,
         "wires": [
             [
                 "71e60370.d43a8c"
@@ -5042,7 +5049,7 @@
         "collection": "LockSlots",
         "operation": "find.toArray",
         "x": 240,
-        "y": 900,
+        "y": 960,
         "wires": [
             [
                 "2b4982d1.f9033e"
@@ -5060,17 +5067,17 @@
         "tostatus": false,
         "complete": "true",
         "x": 370,
-        "y": 900,
+        "y": 960,
         "wires": []
     },
     {
         "id": "9241d592.4ab0f8",
         "type": "comment",
         "z": "593fb5af.ec311c",
-        "name": "Get Slots",
+        "name": "Get Slots Table",
         "info": "",
-        "x": 100,
-        "y": 860,
+        "x": 120,
+        "y": 920,
         "wires": []
     },
     {
@@ -5084,135 +5091,13 @@
         "wires": []
     },
     {
-        "id": "1920499e.93f0a6",
-        "type": "inject",
-        "z": "593fb5af.ec311c",
-        "name": "",
-        "topic": "",
-        "payload": "{}",
-        "payloadType": "json",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "x": 110,
-        "y": 1000,
-        "wires": [
-            [
-                "d6df689.ef86d98"
-            ]
-        ]
-    },
-    {
-        "id": "5033e1e5.3d3a4",
-        "type": "mongodb3 in",
-        "z": "593fb5af.ec311c",
-        "service": "_ext_",
-        "configNode": "7fbc5f5e.d45f6",
-        "name": "Clear Slots",
-        "collection": "LockSlots",
-        "operation": "deleteMany",
-        "x": 390,
-        "y": 1000,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "d6df689.ef86d98",
-        "type": "change",
-        "z": "593fb5af.ec311c",
-        "name": "slot > 1",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "[{\"slot\":{\"$gt\":1}},{}]",
-                "tot": "json"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 240,
-        "y": 1000,
-        "wires": [
-            [
-                "5033e1e5.3d3a4"
-            ]
-        ]
-    },
-    {
         "id": "6ceb7a63.fd9bc4",
         "type": "comment",
         "z": "593fb5af.ec311c",
-        "name": "Clear Slots",
+        "name": "Clear Slots Table",
         "info": "",
-        "x": 100,
-        "y": 960,
-        "wires": []
-    },
-    {
-        "id": "474156e4.518c28",
-        "type": "function",
-        "z": "593fb5af.ec311c",
-        "name": "Check flow vars",
-        "func": "msg.payload = { \n    name: flow.get(\"name\"),\n    code: flow.get(\"code\"),\n    code_enabled: flow.get(\"code_enabled\"),\n    onetime: flow.get(\"onetime\"),\n    allow_when_home: flow.get(\"allow_when_home\"),\n    set_start: flow.get(\"set_start\"),\n    set_end: flow.get(\"set_end\"),\n    start_date: flow.get(\"start_date\"),\n    end_date: flow.get(\"end_date\"),\n    schedule: flow.get(\"schedule\"),\n    days: flow.get(\"days\"),\n    restrict_hours: flow.get(\"restrict_hours\"),\n    start_time: flow.get(\"start_time\"),\n    end_time: flow.get(\"end_time\"),\n    passcode: global.get(\"passcode\")\n};\nmsg.slots = global.get(\"slots\");\nreturn msg;\n",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 260,
-        "y": 480,
-        "wires": [
-            [
-                "5b967a17.9ab964"
-            ]
-        ]
-    },
-    {
-        "id": "17ac2375.504cbd",
-        "type": "inject",
-        "z": "593fb5af.ec311c",
-        "name": "",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "x": 100,
-        "y": 480,
-        "wires": [
-            [
-                "474156e4.518c28"
-            ]
-        ]
-    },
-    {
-        "id": "5b967a17.9ab964",
-        "type": "debug",
-        "z": "593fb5af.ec311c",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "x": 410,
-        "y": 480,
-        "wires": []
-    },
-    {
-        "id": "9865b0ba.2c3a3",
-        "type": "comment",
-        "z": "593fb5af.ec311c",
-        "name": "Get Flow Vars",
-        "info": "",
-        "x": 90,
-        "y": 440,
+        "x": 620,
+        "y": 900,
         "wires": []
     },
     {
@@ -5302,8 +5187,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 720,
-        "y": 480,
+        "x": 140,
+        "y": 380,
         "wires": [
             [
                 "20fe4ee0.df0332"
@@ -5329,8 +5214,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 930,
-        "y": 480,
+        "x": 350,
+        "y": 380,
         "wires": [
             []
         ]
@@ -5339,10 +5224,10 @@
         "id": "9b430f1f.9fd8e",
         "type": "comment",
         "z": "593fb5af.ec311c",
-        "name": "Delete global passcode",
+        "name": "Delete global passcode (reset entered keypad code)",
         "info": "",
-        "x": 700,
-        "y": 440,
+        "x": 210,
+        "y": 340,
         "wires": []
     },
     {
@@ -5350,7 +5235,7 @@
         "type": "function",
         "z": "702e3f6b.43278",
         "name": "lock notification",
-        "func": "var _ = context.global.lodash;\nvar moment = context.global.moment;\n\nnode.status({ fill: \"blue\", shape:\"dot\", text: `Last notification at ${ moment().format('MMM D h:mm a') }` } );\n\nconst notify_devices = global.get(\"notify_devices\");\n\nconst data = { \n    message: msg.payload.status, \n    title: msg.payload.state\n}; \n\nif (_.isEmpty(notify_devices)) {\n    msg.payload = {\n        data: data\n    };\n    \n    return [null, msg];\n}\n\nmsg.payload = notify_devices;\nmsg.data = data;\n\nreturn msg;",
+        "func": "const _ = context.global.lodash;\nconst moment = context.global.moment;\n\nnode.status({ fill: \"blue\", shape:\"dot\", text: `Last notification at ${ moment().format('MMM D h:mm a') }` } );\n\nconst notify_devices = global.get(\"notify_devices\");\n\nconst data = { \n    message: msg.payload.status, \n    title: msg.payload.state\n}; \n\nif (_.isEmpty(notify_devices)) {\n    msg.payload = {\n        data: data\n    };\n    \n    return [null, msg];\n}\n\nmsg.payload = notify_devices;\nmsg.data = data;\n\nreturn msg;",
         "outputs": 2,
         "noerr": 0,
         "x": 300,
@@ -5734,7 +5619,7 @@
         "type": "function",
         "z": "59474d53.1b40d4",
         "name": "Build log message",
-        "func": "var status = msg.data.new_state.attributes.lock_status;\nif (status.indexOf('user') == -1) {\n    // not a user code\n    msg.payload = {\n        state: `Door ${msg.payload}`,\n        type: msg.data.new_state.attributes.notification,\n        status: `Door ${msg.data.new_state.attributes.lock_status}`,\n        time: msg.data.new_state.last_updated\n    };\n    return msg;\n}\n\nconst slots = global.get(\"slots\");\nvar slot = Number(status.substring(status.lastIndexOf(' ') + 1));\n\nconst user = slots.find(u => u.slot === slot);\nif (user === undefined)\n    return [null, { payload: `Door was opened with a code that doesn't have a matching slot ${slot}. Good chance the lock.clear_usercode didn't work which means HA has probably been updated and I need to run the update zwave script` }];\n    \n\nvar m = {};\nm.user = user;\nm.slot = slot;\nm.slots = slots;\nm.status = msg.payload,\nm.payload = {\n    state: `Door ${msg.payload}`,\n    type: msg.data.new_state.attributes.notification,\n    og_status: msg.data.new_state.attributes.lock_status,\n    status: `${status.substring(0, status.indexOf('user') -  4)} by ${user.name}`,\n    time: msg.data.new_state.last_updated\n};\n\nreturn m;",
+        "func": "let status = msg.data.new_state.attributes.lock_status;\nif (status.indexOf('user') == -1) {\n    // not a user code\n    msg.payload = {\n        state: `Door ${msg.payload}`,\n        type: msg.data.new_state.attributes.notification,\n        status: `Door ${msg.data.new_state.attributes.lock_status}`,\n        time: msg.data.new_state.last_updated\n    };\n    return msg;\n}\n\nconst slots = global.get(\"slots\");\nlet slot = Number(status.substring(status.lastIndexOf(' ') + 1));\n\nconst user = slots.find(u => u.slot === slot);\nif (user === undefined)\n    return [null, { payload: `Door was opened with a code that doesn't have a matching slot ${slot}. Good chance the lock.clear_usercode didn't work which means HA has probably been updated and I need to run the update zwave script` }];\n    \n\nlet m = {};\nm.user = user;\nm.slot = slot;\nm.slots = slots;\nm.status = msg.payload,\nm.payload = {\n    state: `Door ${msg.payload}`,\n    type: msg.data.new_state.attributes.notification,\n    og_status: msg.data.new_state.attributes.lock_status,\n    status: `${status.substring(0, status.indexOf('user') -  4)} by ${user.name}`,\n    time: msg.data.new_state.last_updated\n};\n\nreturn m;",
         "outputs": 2,
         "noerr": 0,
         "x": 290,
@@ -6099,133 +5984,11 @@
         "wires": []
     },
     {
-        "id": "b0b1ff04.ffee3",
-        "type": "inject",
-        "z": "593fb5af.ec311c",
-        "name": "Fetch",
-        "topic": "",
-        "payload": "{\"user\":\"U2FsdGVkX18wz553MvB/Fl29LUZq1PrfzPHDwpgZlvIOZmLLQWRUK+oNS4IeyozMyvzi6guGNhH+cS2hH2/IzvT4UOcRyH1Fi9Kv/Vv7PivSIyFc9i50PiDJMnuvYpR0MICz0L69YY2XDTcx4U6aYGo2BYU6pN2WZjpgWTfs4sBNn51m8Xgf+SK2itbC51w5AFyfdx0ocJKJJO5HtPklWy5vLTQOGZoxFGLR7IgZSTIQPdzA5ujmz5oOKYgt2oqoF9wFxtoUQmvUHceXU+U2mTU5+upN/sXlj8z/XKeww7htkJGMp3rZ0bRvAvaXceJypO2l/epCVdCsszrkuj0pCULfVP5tFdlETYj2f3CqK+frNextjQzHkrbx8k7s0/uF\"}",
-        "payloadType": "json",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "x": 730,
-        "y": 680,
-        "wires": [
-            [
-                "83bf703e.3968"
-            ]
-        ]
-    },
-    {
-        "id": "83bf703e.3968",
-        "type": "mongodb3 in",
-        "z": "593fb5af.ec311c",
-        "service": "_ext_",
-        "configNode": "7fbc5f5e.d45f6",
-        "name": "Delete",
-        "collection": "LockUsers",
-        "operation": "deleteOne",
-        "x": 850,
-        "y": 680,
-        "wires": [
-            [
-                "79f1dc96.84a234"
-            ]
-        ]
-    },
-    {
-        "id": "79f1dc96.84a234",
-        "type": "debug",
-        "z": "593fb5af.ec311c",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "x": 990,
-        "y": 680,
-        "wires": []
-    },
-    {
-        "id": "8c417e6.0cc8c8",
-        "type": "comment",
-        "z": "593fb5af.ec311c",
-        "name": "Delete by _id",
-        "info": "",
-        "x": 730,
-        "y": 640,
-        "wires": []
-    },
-    {
-        "id": "168bdfd.2d7ad2",
-        "type": "inject",
-        "z": "593fb5af.ec311c",
-        "name": "Fetch",
-        "topic": "",
-        "payload": "{\"name\": \"Test\"}",
-        "payloadType": "json",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "x": 730,
-        "y": 780,
-        "wires": [
-            [
-                "fdb01b61.1e4708"
-            ]
-        ]
-    },
-    {
-        "id": "fdb01b61.1e4708",
-        "type": "mongodb3 in",
-        "z": "593fb5af.ec311c",
-        "service": "_ext_",
-        "configNode": "7fbc5f5e.d45f6",
-        "name": "Find",
-        "collection": "LockManager",
-        "operation": "findOneAndDelete",
-        "x": 850,
-        "y": 780,
-        "wires": [
-            [
-                "c7eba276.9f09d"
-            ]
-        ]
-    },
-    {
-        "id": "c7eba276.9f09d",
-        "type": "debug",
-        "z": "593fb5af.ec311c",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "x": 990,
-        "y": 780,
-        "wires": []
-    },
-    {
-        "id": "e78e53bb.c4611",
-        "type": "comment",
-        "z": "593fb5af.ec311c",
-        "name": "Get by _id",
-        "info": "",
-        "x": 720,
-        "y": 740,
-        "wires": []
-    },
-    {
         "id": "65b5595d.a95258",
         "type": "function",
         "z": "4c9161c6.7a8fe",
         "name": "Format Date",
-        "func": "var moment = context.global.moment;\n\nmsg.payload = moment(msg.payload).format('M/D/YY')\nreturn msg;\n",
+        "func": "const moment = context.global.moment;\n\nmsg.payload = moment(msg.payload).format('M/D/YY')\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "x": 1010,
@@ -6241,7 +6004,7 @@
         "type": "function",
         "z": "4c9161c6.7a8fe",
         "name": "Format Date",
-        "func": "var moment = context.global.moment;\n\nmsg.payload = moment(msg.payload).format('M/D/YY')\nreturn msg;\n",
+        "func": "const moment = context.global.moment;\n\nmsg.payload = moment(msg.payload).format('M/D/YY')\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "x": 1010,
@@ -6267,7 +6030,7 @@
         "type": "function",
         "z": "702e3f6b.43278",
         "name": "user notification",
-        "func": "var _ = context.global.lodash;\nvar moment = context.global.moment;\n\nnode.status({ fill: \"blue\", shape:\"dot\", text: `Last notification at ${ moment().format('MMM D h:mm a') }` } );\n\nconst notify_devices = global.get(\"notify_devices\");\nconst action = global.get(\"user_type\");\n\nconst data = { \n    message: `${msg.name} [${msg.code}] was ${action.toLowerCase()}`, \n    title: `Lock Manager - User ${action}`\n}; \n\nif (_.isEmpty(notify_devices)) {\n    msg.payload = {\n        data: data\n    };\n    \n    return [null, msg];\n}\n\nmsg.payload = notify_devices;\nmsg.data = data;\n\nreturn msg;",
+        "func": "const _ = context.global.lodash;\nconst moment = context.global.moment;\n\nnode.status({ fill: \"blue\", shape:\"dot\", text: `Last notification at ${ moment().format('MMM D h:mm a') }` } );\n\nconst notify_devices = global.get(\"notify_devices\");\nconst action = global.get(\"user_type\");\n\nconst data = { \n    message: `${msg.name} [${msg.code}] was ${action.toLowerCase()}`, \n    title: `Lock Manager - User ${action}`\n}; \n\nif (_.isEmpty(notify_devices)) {\n    msg.payload = {\n        data: data\n    };\n    \n    return [null, msg];\n}\n\nmsg.payload = notify_devices;\nmsg.data = data;\n\nreturn msg;",
         "outputs": 2,
         "noerr": 0,
         "x": 300,
@@ -6340,7 +6103,7 @@
         "type": "function",
         "z": "702e3f6b.43278",
         "name": "scheduled notification",
-        "func": "var _ = context.global.lodash;\nvar moment = context.global.moment;\n\nnode.status({ fill: \"blue\", shape:\"dot\", text: `Last notification at ${ moment().format('MMM D h:mm a') }` } );\n\nconst notify_devices = global.get(\"notify_devices\");\n\nconst data = { \n    message: `${msg.name} was ${msg.action.toLowerCase()} at ${ moment().format('MMM D h:mm a') }`, \n    title: `Lock Manager - Lock usercode ${msg.action}`\n}; \n\nif (_.isEmpty(notify_devices)) {\n    msg.payload = {\n        data: data\n    };\n    \n    return [null, msg];\n}\n\nmsg.payload = notify_devices;\nmsg.data = data;\n\nreturn msg;",
+        "func": "const _ = context.global.lodash;\nconst moment = context.global.moment;\n\nnode.status({ fill: \"blue\", shape:\"dot\", text: `Last notification at ${ moment().format('MMM D h:mm a') }` } );\n\nconst notify_devices = global.get(\"notify_devices\");\n\nconst data = { \n    message: `${msg.name} was ${msg.action.toLowerCase()} at ${ moment().format('MMM D h:mm a') }`, \n    title: `Lock Manager - Lock usercode ${msg.action}`\n}; \n\nif (_.isEmpty(notify_devices)) {\n    msg.payload = {\n        data: data\n    };\n    \n    return [null, msg];\n}\n\nmsg.payload = notify_devices;\nmsg.data = data;\n\nreturn msg;",
         "outputs": 2,
         "noerr": 0,
         "x": 320,
@@ -6384,88 +6147,6 @@
         "x": 250,
         "y": 340,
         "wires": []
-    },
-    {
-        "id": "6885d866.a7dae8",
-        "type": "inject",
-        "z": "593fb5af.ec311c",
-        "name": "Fetch",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "x": 730,
-        "y": 960,
-        "wires": [
-            [
-                "8ce0f7ef.d63848"
-            ]
-        ]
-    },
-    {
-        "id": "8ce0f7ef.d63848",
-        "type": "function",
-        "z": "593fb5af.ec311c",
-        "name": "",
-        "func": "var code = '0046';\nvar name = 'Kristen'\n\nvar user = { payload: [\n    {\n        \"code\": code, \n        \"name\": name\n    },\n    {}\n]};\nvar slot = { payload: {\"name\": name } };\n\nreturn [user, slot];",
-        "outputs": 2,
-        "noerr": 0,
-        "x": 850,
-        "y": 960,
-        "wires": [
-            [
-                "9a97e3a9.d2b5f"
-            ],
-            [
-                "88dceb56.551518"
-            ]
-        ]
-    },
-    {
-        "id": "9a97e3a9.d2b5f",
-        "type": "debug",
-        "z": "593fb5af.ec311c",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "x": 1010,
-        "y": 920,
-        "wires": []
-    },
-    {
-        "id": "88dceb56.551518",
-        "type": "debug",
-        "z": "593fb5af.ec311c",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "x": 1010,
-        "y": 980,
-        "wires": []
-    },
-    {
-        "id": "7a366aaf.97a764",
-        "type": "function",
-        "z": "593fb5af.ec311c",
-        "name": "",
-        "func": "var code = '0046';\nvar name = 'Kristen'\nvar user_query = [\n    {\n        \"code\": code, \n        \"name\": name\n    },\n    {}\n];\nvar user = {};\nuser.payload = user_query;\n\nvar slot_query = { \"name\": name };\nvar slot = {};\nslot.payload = slot_query;\n\nreturn [user, slot];",
-        "outputs": 2,
-        "noerr": 0,
-        "x": 870,
-        "y": 1000,
-        "wires": [
-            [],
-            []
-        ]
     },
     {
         "id": "e2b11f71.91bbe",
@@ -6881,20 +6562,6 @@
         ]
     },
     {
-        "id": "2a00346.ad6f6cc",
-        "type": "subflow:b93cc620.a18cb8",
-        "z": "593fb5af.ec311c",
-        "name": "Generate random code",
-        "env": [],
-        "x": 290,
-        "y": 1220,
-        "wires": [
-            [
-                "4305237b.4e2d6c"
-            ]
-        ]
-    },
-    {
         "id": "c578514b.2f78b",
         "type": "comment",
         "z": "b93cc620.a18cb8",
@@ -6902,41 +6569,6 @@
         "info": "This generates a random number as long as the code length specified. It's more complicated\nthan it needs to be because I wanted to generate codes that start with 0. So something like\n0045 can be generated.",
         "x": 150,
         "y": 60,
-        "wires": []
-    },
-    {
-        "id": "2f9beb38.925474",
-        "type": "inject",
-        "z": "593fb5af.ec311c",
-        "name": "",
-        "topic": "",
-        "payload": "{}",
-        "payloadType": "json",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "x": 90,
-        "y": 1200,
-        "wires": [
-            [
-                "2a00346.ad6f6cc",
-                "482919f3.590c18"
-            ]
-        ]
-    },
-    {
-        "id": "4305237b.4e2d6c",
-        "type": "debug",
-        "z": "593fb5af.ec311c",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "x": 490,
-        "y": 1220,
         "wires": []
     },
     {
@@ -7010,33 +6642,6 @@
         "wires": [
             []
         ]
-    },
-    {
-        "id": "482919f3.590c18",
-        "type": "subflow:85b5cbfc.b785c8",
-        "z": "593fb5af.ec311c",
-        "name": "",
-        "x": 270,
-        "y": 1160,
-        "wires": [
-            [
-                "eb07f7b2.932f58"
-            ]
-        ]
-    },
-    {
-        "id": "eb07f7b2.932f58",
-        "type": "debug",
-        "z": "593fb5af.ec311c",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "x": 410,
-        "y": 1160,
-        "wires": []
     },
     {
         "id": "707563b9.14acac",
@@ -7194,7 +6799,7 @@
         "type": "function",
         "z": "593fb5af.ec311c",
         "name": "",
-        "func": "var helpers = global.get(\"helpers\");\nnode.log(helpers.examples());\nlet t = \"abc\";\nlet bob = {};\nlet bill = {a: 1};\n\nnode.log(typeof bob === 'object' && bob !== null);\nnode.log(typeof t === 'object' && t !== null);\nnode.log(helpers.isEmpty(bob));\nnode.log(helpers.isEmpty(bill));\n\nObject.prototype.isEmpty2 = function() {\n    node.log(\"made it 2\");\n    return !Object.getOwnPropertySymbols(this).length && !Object.getOwnPropertyNames(this).length;\n};\n\nreturn msg;",
+        "func": "const helpers = global.get(\"helpers\");\nlet t = \"abc\";\nlet bob = {};\nlet bill = {a: 1};\n\nnode.log(typeof bob === 'object' && bob !== null);\nnode.log(typeof t === 'object' && t !== null);\nnode.log(helpers.isEmpty(bob));\nnode.log(helpers.isEmpty(bill));\n\nObject.prototype.isEmpty2 = function() {\n    node.log(\"made it 2\");\n    return !Object.getOwnPropertySymbols(this).length && !Object.getOwnPropertyNames(this).length;\n};\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 250,
@@ -7225,7 +6830,7 @@
         "type": "function",
         "z": "593fb5af.ec311c",
         "name": "",
-        "func": "class Helpers {\n\n  constructor(name, fierce){\n    this._name = name;\n    this._fierce = fierce;\n  }\n\n  static examples() {\n    return `Some examples of animals are Lion, Elephant, Sheep, Rhinocerus etc`\n  }\n\nstatic isEmpty(obj) {\n    node.log(\"made it 2\");\n    return !Object.getOwnPropertySymbols(obj).length && !Object.getOwnPropertyNames(obj).length;\n}\n\n}\n\nglobal.set(\"helpers\", Helpers);\nreturn msg;",
+        "func": "class Helpers {\n\n    static isEmpty(obj) {\n        return !Object.getOwnPropertySymbols(obj).length && !Object.getOwnPropertyNames(obj).length;\n    }\n\n}\n\nglobal.set(\"helpers\", Helpers);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 250,
@@ -7482,16 +7087,6 @@
         "wires": []
     },
     {
-        "id": "a4b579a7.21f138",
-        "type": "comment",
-        "z": "593fb5af.ec311c",
-        "name": "Test Subflows",
-        "info": "",
-        "x": 90,
-        "y": 1140,
-        "wires": []
-    },
-    {
         "id": "37b6f9ab.601b76",
         "type": "comment",
         "z": "593fb5af.ec311c",
@@ -7570,74 +7165,6 @@
         ]
     },
     {
-        "id": "134d8b9b.f92ca4",
-        "type": "inject",
-        "z": "593fb5af.ec311c",
-        "name": "Fetch",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "x": 730,
-        "y": 840,
-        "wires": [
-            [
-                "8c6e427d.0ff3d"
-            ]
-        ]
-    },
-    {
-        "id": "c6cdd139.3663a",
-        "type": "mongodb3 in",
-        "z": "593fb5af.ec311c",
-        "service": "_ext_",
-        "configNode": "7fbc5f5e.d45f6",
-        "name": "Delete",
-        "collection": "LockManager",
-        "operation": "deleteOne",
-        "x": 990,
-        "y": 860,
-        "wires": [
-            [
-                "74edfb43.66a824"
-            ]
-        ]
-    },
-    {
-        "id": "74edfb43.66a824",
-        "type": "debug",
-        "z": "593fb5af.ec311c",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "x": 1130,
-        "y": 860,
-        "wires": []
-    },
-    {
-        "id": "8c6e427d.0ff3d",
-        "type": "function",
-        "z": "593fb5af.ec311c",
-        "name": "",
-        "func": "return { \"_id\": \"5d482ae843f7a77acaf9b24d\" }",
-        "outputs": 2,
-        "noerr": 0,
-        "x": 850,
-        "y": 880,
-        "wires": [
-            [
-                "c6cdd139.3663a"
-            ],
-            []
-        ]
-    },
-    {
         "id": "2fd7edc2.e84a12",
         "type": "inject",
         "z": "593fb5af.ec311c",
@@ -7649,8 +7176,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 710,
-        "y": 1100,
+        "x": 610,
+        "y": 800,
         "wires": [
             [
                 "115715db.7e808a"
@@ -7666,8 +7193,8 @@
         "name": "Delete",
         "collection": "LockUsers",
         "operation": "deleteMany",
-        "x": 830,
-        "y": 1100,
+        "x": 730,
+        "y": 800,
         "wires": [
             [
                 "32f3a819.b3aad8"
@@ -7684,8 +7211,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 970,
-        "y": 1100,
+        "x": 870,
+        "y": 800,
         "wires": []
     },
     {
@@ -7694,8 +7221,8 @@
         "z": "593fb5af.ec311c",
         "name": "Truncate LockUsers table",
         "info": "",
-        "x": 750,
-        "y": 1060,
+        "x": 650,
+        "y": 760,
         "wires": []
     },
     {
@@ -8479,7 +8006,7 @@
         "type": "function",
         "z": "4c9161c6.7a8fe",
         "name": "Blank",
-        "func": "global.set('user_type', 'Created');\n\nvar name = msg.name;\nflow.set(\"name\", name);\nmsg = {};\nmsg.name = name;\nmsg.code = \"\";\nmsg.set_start = false;\nmsg.start_date = new Date();\nmsg.set_end = false;\nmsg.end_date = new Date(new Date().setFullYear(new Date().getFullYear() + 1));\nmsg.code_enabled = false;\nmsg.onetime = false;\nmsg.allow_when_home = false;\nmsg.schedule = false;\n\nreturn msg;",
+        "func": "global.set('user_type', 'Created');\n\nlet name = msg.name;\nflow.set(\"name\", name);\nmsg = {};\nmsg.name = name;\nmsg.code = \"\";\nmsg.set_start = false;\nmsg.start_date = new Date();\nmsg.set_end = false;\nmsg.end_date = new Date(new Date().setFullYear(new Date().getFullYear() + 1));\nmsg.code_enabled = false;\nmsg.onetime = false;\nmsg.allow_when_home = false;\nmsg.schedule = false;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 1250,
@@ -9678,67 +9205,6 @@
         "wires": []
     },
     {
-        "id": "e910d2a4.2aa8b8",
-        "type": "inject",
-        "z": "593fb5af.ec311c",
-        "name": "",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "x": 100,
-        "y": 340,
-        "wires": [
-            [
-                "145d12fb.0670d5"
-            ]
-        ]
-    },
-    {
-        "id": "145d12fb.0670d5",
-        "type": "change",
-        "z": "593fb5af.ec311c",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "lock_node_id",
-                "tot": "global"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 260,
-        "y": 340,
-        "wires": [
-            [
-                "a082a8db.e2191"
-            ]
-        ]
-    },
-    {
-        "id": "a082a8db.e2191",
-        "type": "debug",
-        "z": "593fb5af.ec311c",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "x": 430,
-        "y": 340,
-        "wires": []
-    },
-    {
         "id": "22eec7b8.06862",
         "type": "link in",
         "z": "4d149fd1.afec5",
@@ -9829,8 +9295,8 @@
         "output_location": "",
         "output_location_type": "none",
         "mustacheAltTags": false,
-        "x": 950,
-        "y": 360,
+        "x": 960,
+        "y": 380,
         "wires": [
             [
                 "65bf193b.8e2ae8"
@@ -9847,8 +9313,8 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 1130,
-        "y": 360,
+        "x": 1140,
+        "y": 380,
         "wires": []
     },
     {
@@ -9869,7 +9335,7 @@
         "type": "function",
         "z": "57f31d03.1c5fc4",
         "name": "Slot found",
-        "func": "const _ = context.global.lodash;\n\nif (!_.isEmpty(msg.payload)) {\n    node.log(\"SLOT FOUND\");\n    node.status({ fill: \"blue\", shape: \"dot\", text: `existing slot ${msg.payload}` });\n    return { slot: msg.payload.slot, payload: msg.backup };\n} else {\n    node.log(\"SLOT NOT FOUND - CALLING GET NEXT SLOT\");\n    node.status({ fill: \"green\", shape: \"dot\", text: \"get next slot\" });\n    var m = {};\n    m.payload = msg;\n    return [null, m ];\n}",
+        "func": "const _ = context.global.lodash;\n\nif (!_.isEmpty(msg.payload)) {\n    node.log(\"SLOT FOUND\");\n    node.status({ fill: \"blue\", shape: \"dot\", text: `existing slot ${msg.payload}` });\n    return { slot: msg.payload.slot, payload: msg.backup };\n} else {\n    node.log(\"SLOT NOT FOUND - CALLING GET NEXT SLOT\");\n    node.status({ fill: \"green\", shape: \"dot\", text: \"get next slot\" });\n    let m = {};\n    m.payload = msg;\n    return [null, m ];\n}",
         "outputs": 2,
         "noerr": 0,
         "x": 710,
@@ -9960,64 +9426,6 @@
         ]
     },
     {
-        "id": "7b4edb75.c351ec",
-        "type": "api-call-service",
-        "z": "593fb5af.ec311c",
-        "name": "",
-        "server": "349447fb.a8b908",
-        "version": 1,
-        "service_domain": "lock",
-        "service": "set_usercode",
-        "entityId": "",
-        "data": "{\"node_id\":26,\"usercode\":\"0577\",\"code_slot\":4}",
-        "dataType": "json",
-        "mergecontext": "",
-        "output_location": "payload",
-        "output_location_type": "msg",
-        "mustacheAltTags": false,
-        "x": 1000,
-        "y": 560,
-        "wires": [
-            [
-                "987510a3.8de7d8"
-            ]
-        ]
-    },
-    {
-        "id": "7cea07b4.74468",
-        "type": "inject",
-        "z": "593fb5af.ec311c",
-        "name": "",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "x": 820,
-        "y": 560,
-        "wires": [
-            [
-                "7b4edb75.c351ec"
-            ]
-        ]
-    },
-    {
-        "id": "987510a3.8de7d8",
-        "type": "debug",
-        "z": "593fb5af.ec311c",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "x": 1170,
-        "y": 560,
-        "wires": []
-    },
-    {
         "id": "58162262.f91854",
         "type": "inject",
         "z": "593fb5af.ec311c",
@@ -10029,8 +9437,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 90,
-        "y": 1860,
+        "x": 110,
+        "y": 1120,
         "wires": [
             [
                 "549a018.9889b8"
@@ -10056,8 +9464,8 @@
         "entity_location": "data",
         "override_data": "msg",
         "blockInputOverrides": false,
-        "x": 240,
-        "y": 1860,
+        "x": 260,
+        "y": 1120,
         "wires": [
             [
                 "2ef9d2cb.22cf0e"
@@ -10074,18 +9482,18 @@
         "console": false,
         "tostatus": false,
         "complete": "true",
-        "x": 510,
-        "y": 1860,
+        "x": 530,
+        "y": 1120,
         "wires": []
     },
     {
         "id": "a5cd2981.0a3d8",
         "type": "comment",
         "z": "593fb5af.ec311c",
-        "name": "### LOCK BATTERY PERCENTAGE ###",
+        "name": "### LOCK BATTERY PERCENTAGE (not sure this is reliable) ###",
         "info": "",
-        "x": 180,
-        "y": 1820,
+        "x": 280,
+        "y": 1080,
         "wires": []
     },
     {
@@ -10206,8 +9614,8 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 110,
-        "y": 1060,
+        "x": 590,
+        "y": 960,
         "wires": [
             [
                 "54bf45f6.a42134"
@@ -10223,10 +9631,12 @@
         "name": "Clear Slots",
         "collection": "LockSlots",
         "operation": "deleteMany",
-        "x": 390,
-        "y": 1060,
+        "x": 730,
+        "y": 960,
         "wires": [
-            []
+            [
+                "279f662d.546a6a"
+            ]
         ]
     },
     {
@@ -10477,7 +9887,7 @@
         "type": "function",
         "z": "4d149fd1.afec5",
         "name": "Get free slots",
-        "func": "const _ = context.global.lodash;\n\ncontext.data = context.data || {};\n\nswitch (msg.topic) {\n    case \"users\":\n        context.data.users = msg.payload;\n        msg = null;\n        break;\n    case \"slots\":\n        context.data.slots = msg.payload;\n        msg = null;\n        break;\n    default:\n        msg = null;\n    \tbreak;\n\n}\n\nif(context.data.users !== undefined && context.data.slots !== undefined) {\n    let users = context.data.users;\n    let slots = context.data.slots.map(s => s.slot);\n\n    let freeSlots = getFreeSlots(slots);\n    node.status({ fill: \"blue\", shape: \"dot\", text: `free slots ${freeSlots}` });\n\n\tmsg = { \n\t    users: users,\n\t    slots: context.data.slots,\n\t    freeSlots: freeSlots\n\t};\n    global.set(\"slots\", context.data.slots);\n    context.data = null;\n\treturn msg;\n} else return msg;\n\nfunction getFreeSlots(usedSlots) {\n    let offset = global.get(\"slot_offset\") + 1;\n    let allSlots = Array.from({length: 31 - offset}, (v, k) => k + offset);\n    let users = context.data.users;\n\n    let allFreeSlots = _.difference(allSlots, usedSlots);\n    let freeSlots = allFreeSlots.slice(0, users.length);\n    return freeSlots;\n}\n",
+        "func": "const _ = context.global.lodash;\n\ncontext.data = context.data || {};\n\nswitch (msg.topic) {\n    case \"users\":\n        context.data.users = msg.payload;\n        msg = null;\n        break;\n    case \"slots\":\n        context.data.slots = msg.payload;\n        msg = null;\n        break;\n    default:\n        msg = null;\n    \tbreak;\n\n}\n\nif(context.data.users !== undefined && context.data.slots !== undefined) {\n    let users = context.data.users;\n    let slots = context.data.slots.map(s => s.slot);\n\n    let freeSlots = getFreeSlots(slots);\n    node.status({ fill: \"blue\", shape: \"dot\", text: `free slots ${freeSlots}` });\n\n\tmsg = { \n\t    users: users,\n\t    slots: context.data.slots,\n\t    freeSlots: freeSlots\n\t};\n    global.set(\"slots\", context.data.slots);\n    context.data = null;\n\treturn msg;\n} else return msg;\n\nfunction getFreeSlots(usedSlots) {\n    let maxSlots = global.get(\"max_supported_slots\") + 1;\n    let offset = global.get(\"slot_offset\") + 1;\n    let allSlots = Array.from({length: maxSlots - offset}, (v, k) => k + offset);\n    let users = context.data.users;\n\n    let allFreeSlots = _.difference(allSlots, usedSlots);\n    let freeSlots = allFreeSlots.slice(0, users.length);\n    return freeSlots;\n}\n",
         "outputs": 1,
         "noerr": 0,
         "x": 430,
@@ -10520,7 +9930,7 @@
         "type": "function",
         "z": "4d149fd1.afec5",
         "name": "Parse codes",
-        "func": "//node.log(`freeSlots > ${JSON.stringify(msg.freeSlots, null, 2)}`);\nlet valid = msg.users.filter(u => u.code_enabled && (validPermanent(u) || validSchedule(u)));\nlet invalid = msg.users\n    .filter(u => !valid.includes(u))\n    .concat(valid.filter(u => !msg.users.includes(u)));\n    \nlet need_to_add = valid.filter(u => !hasSlot(u));\nneed_to_add = need_to_add.map((u, index) => {\n  return { slot:  msg.freeSlots[index], name: u.name, code: u.code };\n});\n\nlet add_array = Object.keys(need_to_add).map(key => need_to_add[key]);\nlet need_to_delete = invalid.filter(function(u) {\n  return hasSlot(u);\n}).map(function(u) { \n    let slot = getSlot(u);\n    if (slot !== undefined)\n        return {slot: slot.slot, name: slot.name}\n});\n\n//node.log(`\\n ******* PARSE CODES *******\\n\\nNeed to add\\n${JSON.stringify(need_to_add, null, 2)}\\n\\nadd_Array\\n${JSON.stringify(add_array, null, 2)}\\n\\n******* END PARSE CODES *******`);\n//node.log(`\\n ******* PARSE CODES *******\\n\\nNeed to add\\n${JSON.stringify(need_to_add, null, 2)}\\n\\nneed to delete\\n${JSON.stringify(need_to_delete, null, 2)}\\n\\n******* END PARSE CODES *******`);\n//node.log(`\\n ******* PARSE CODES *******\\n\\nfreeslots\\n${msg.freeslots}\\n\\n******* END PARSE CODES *******`);\n\n//node.log(`delete > ${JSON.stringify(need_to_delete, null, 2)}`);\n\nlet add_count = need_to_add.length || 0;\nlet delete_count = need_to_delete.length || 0;\n\nnode.status({ fill: \"blue\", shape: \"dot\", text: `add: ${add_count} delete: ${delete_count}` });\n//msg.payload = need_to_add;\n//msg.topic = \"Scheduled code add\";\n\nlet add_users = {};\nif (add_count > 0) {\n    need_to_add.topic = \"Scheduled code add\";\n    add_users.payload = need_to_add;\n} else add_users = null;\n\nlet delete_users = {};\nif (delete_count > 0) {\n    need_to_delete.topic = 'Scheduled code delete';\n    delete_users.payload = need_to_delete;\n} else delete_users = null;\n\n//return [msg, need_to_delete];\nreturn [add_users, delete_users];\n\nfunction validPermanent(user) {\n    return (validStart(user) && validEnd(user) && validDay(user) && validTime(user) && validWhileAway(user))\n}\nfunction validStart(user) {\n    return !user.set_start || user.start_date <= now;\n}\n\nfunction validEnd(user) {\n    return !user.set_end || user.end_date >= now;\n}\n\nfunction validDay(user) {\n    if (!user.schedule)\n        return true;\n        \n    let d = new Date();\n    let weekday = new Array(7);\n    weekday[0] =  \"Sunday\";\n    weekday[1] = \"Monday\";\n    weekday[2] = \"Tuesday\";\n    weekday[3] = \"Wednesday\";\n    weekday[4] = \"Thursday\";\n    weekday[5] = \"Friday\";\n    weekday[6] = \"Saturday\";\n    var n = weekday[d.getDay()];\n    try {\n        var a = user.days.includes(n);\n    } catch(ex) { \n        node.log(`ERROR - ${JSON.stringify(user, null, 2)}`); \n    }\n    return !user.schedule || user.days.includes(n);\n}\n\nfunction validTime(user) {\n    let d = new Date(), e = new Date(d);\n    let msSinceMidnight = e - d.setHours(0, 0, 0, 0);\n    return !user.restrict_hours || (msSinceMidnight >= user.start_time && msSinceMidnight <= user.end_time);\n}\n\nfunction validWhileAway(user) {\n    let away = global.get(\"presence\") === \"all_away\";\n    return user.allow_when_home || away;\n}\n\nfunction validSchedule(user) {\n    return (validStart(user) && validEnd(user) && validDay(user) && validTime(user) && validWhileAway(user))\n}\n\nfunction hasSlot(user) {\n//    node.log(`*****************\\n msg.slots \\n${JSON.stringify(msg.slots, null, 2)}\\n*****************************`);\n\n    return msg.slots.find(slot => slot.name  === user.name);\n}\n\nfunction getSlot(user) {\n    return msg.slots.find(slot => slot.name  === user.name);\n}\n",
+        "func": "//node.log(`freeSlots > ${JSON.stringify(msg.freeSlots, null, 2)}`);\nlet valid = msg.users.filter(u => u.code_enabled && (validPermanent(u) || validSchedule(u)));\nlet invalid = msg.users\n    .filter(u => !valid.includes(u))\n    .concat(valid.filter(u => !msg.users.includes(u)));\n    \nlet need_to_add = valid.filter(u => !hasSlot(u));\nneed_to_add = need_to_add.map((u, index) => {\n  return { slot:  msg.freeSlots[index], name: u.name, code: u.code };\n});\n\nlet add_array = Object.keys(need_to_add).map(key => need_to_add[key]);\nlet need_to_delete = invalid.filter(function(u) {\n  return hasSlot(u);\n}).map(function(u) { \n    let slot = getSlot(u);\n    if (slot !== undefined)\n        return {slot: slot.slot, name: slot.name}\n});\n\n//node.log(`\\n ******* PARSE CODES *******\\n\\nNeed to add\\n${JSON.stringify(need_to_add, null, 2)}\\n\\nadd_Array\\n${JSON.stringify(add_array, null, 2)}\\n\\n******* END PARSE CODES *******`);\n//node.log(`\\n ******* PARSE CODES *******\\n\\nNeed to add\\n${JSON.stringify(need_to_add, null, 2)}\\n\\nneed to delete\\n${JSON.stringify(need_to_delete, null, 2)}\\n\\n******* END PARSE CODES *******`);\n//node.log(`\\n ******* PARSE CODES *******\\n\\nfreeslots\\n${msg.freeslots}\\n\\n******* END PARSE CODES *******`);\n\n//node.log(`delete > ${JSON.stringify(need_to_delete, null, 2)}`);\n\nlet add_count = need_to_add.length || 0;\nlet delete_count = need_to_delete.length || 0;\n\nnode.status({ fill: \"blue\", shape: \"dot\", text: `add: ${add_count} delete: ${delete_count}` });\n//msg.payload = need_to_add;\n//msg.topic = \"Scheduled code add\";\n\nlet add_users = {};\nif (add_count > 0) {\n    need_to_add.topic = \"Scheduled code add\";\n    add_users.payload = need_to_add;\n} else add_users = null;\n\nlet delete_users = {};\nif (delete_count > 0) {\n    need_to_delete.topic = 'Scheduled code delete';\n    delete_users.payload = need_to_delete;\n} else delete_users = null;\n\n//return [msg, need_to_delete];\nreturn [add_users, delete_users];\n\nfunction validPermanent(user) {\n    return (validStart(user) && validEnd(user) && validDay(user) && validTime(user) && validWhileAway(user))\n}\nfunction validStart(user) {\n    return !user.set_start || user.start_date <= now;\n}\n\nfunction validEnd(user) {\n    return !user.set_end || user.end_date >= now;\n}\n\nfunction validDay(user) {\n    if (!user.schedule)\n        return true;\n        \n    let d = new Date();\n    let weekday = new Array(7);\n    weekday[0] =  \"Sunday\";\n    weekday[1] = \"Monday\";\n    weekday[2] = \"Tuesday\";\n    weekday[3] = \"Wednesday\";\n    weekday[4] = \"Thursday\";\n    weekday[5] = \"Friday\";\n    weekday[6] = \"Saturday\";\n    let n = weekday[d.getDay()];\n    try {\n        let a = user.days.includes(n);\n    } catch(ex) { \n        node.log(`ERROR - ${JSON.stringify(user, null, 2)}`); \n    }\n    return !user.schedule || user.days.includes(n);\n}\n\nfunction validTime(user) {\n    let d = new Date(), e = new Date(d);\n    let msSinceMidnight = e - d.setHours(0, 0, 0, 0);\n    return !user.restrict_hours || (msSinceMidnight >= user.start_time && msSinceMidnight <= user.end_time);\n}\n\nfunction validWhileAway(user) {\n    let away = global.get(\"presence\") === \"all_away\";\n    return user.allow_when_home || away;\n}\n\nfunction validSchedule(user) {\n    return (validStart(user) && validEnd(user) && validDay(user) && validTime(user) && validWhileAway(user))\n}\n\nfunction hasSlot(user) {\n//    node.log(`*****************\\n msg.slots \\n${JSON.stringify(msg.slots, null, 2)}\\n*****************************`);\n\n    return msg.slots.find(slot => slot.name  === user.name);\n}\n\nfunction getSlot(user) {\n    return msg.slots.find(slot => slot.name  === user.name);\n}\n",
         "outputs": 2,
         "noerr": 0,
         "x": 590,
@@ -10590,8 +10000,8 @@
         "func": "msg.payload = msg.data.attributes.battery_level;\nlet color = '';\nif (msg.payload < 30)\n    color = 'red';\nelse if (msg.payload >= 31 && msg.payload < 50)\n    color = 'yellow';\nelse\n    color = 'green';\n\nnode.status({ fill: color, shape: \"dot\", text: `Lock battery at ${ msg.payload }%`});\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 390,
-        "y": 1860,
+        "x": 410,
+        "y": 1120,
         "wires": [
             [
                 "7faef088.b51f"
@@ -10715,7 +10125,7 @@
         "type": "function",
         "z": "59474d53.1b40d4",
         "name": "Build log message",
-        "func": "var moment = context.global.moment;\n\nlet user = msg.user;\nif (global.get(\"use_encryption\"))\n    user.code = '****';\n\nreturn { \n    payload: {\n        \"type\": msg.topic,\n        \"date\": moment().format('h:mm a M/D/YY'),\n        \"user\": user\n    }\n};\n",
+        "func": "const moment = context.global.moment;\n\nlet user = msg.user;\nif (global.get(\"use_encryption\"))\n    user.code = '****';\n\nreturn { \n    payload: {\n        \"type\": msg.topic,\n        \"date\": moment().format('h:mm a M/D/YY'),\n        \"user\": user\n    }\n};\n",
         "outputs": 1,
         "noerr": 0,
         "x": 870,
@@ -10836,7 +10246,7 @@
         "type": "function",
         "z": "59474d53.1b40d4",
         "name": "Build log message",
-        "func": "var moment = context.global.moment;\n\nif (msg.topic === 'Scheduled code delete')\n    return { \n        payload: {\n            \"type\": msg.topic,\n            \"date\": moment().format('h:mm a M/D/YY'),\n            \"slot\": msg.slot,\n            \"name\": msg.name\n        }\n    };\nelse\n    return msg;",
+        "func": "const moment = context.global.moment;\n\nif (msg.topic === 'Scheduled code delete')\n    return { \n        payload: {\n            \"type\": msg.topic,\n            \"date\": moment().format('h:mm a M/D/YY'),\n            \"slot\": msg.slot,\n            \"name\": msg.name\n        }\n    };\nelse\n    return msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 970,
@@ -10980,5 +10390,19 @@
                 "8e41d961.396ce8"
             ]
         ]
+    },
+    {
+        "id": "279f662d.546a6a",
+        "type": "debug",
+        "z": "593fb5af.ec311c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "x": 870,
+        "y": 960,
+        "wires": []
     }
 ]
