@@ -87,11 +87,14 @@ git clone git@github.com:jayheavner/lock-manager.git
    *Sometimes these nodes need to be opened and closed and redeployed at least once to work. I don't know why that is. If you see
    errors in node-red, try this.*
 
-8. Deploy
+8. Change the various entity_ids to match your lock's entity_id. there are a couple places on the Event Handler tab. I think everything else uses the node_id, which is defined in global vars.
 
-9. Open the web ui interface
+10. Deploy
+
+11. Open the web ui interface
    ```
    http://<ip>:1880/ui
+   ```
 
 ## DB – Info
 Three Mongo collections are created.
@@ -100,7 +103,7 @@ Three Mongo collections are created.
 3.	LockLog – Logs events
 
 ## Variables
-There is a node named 'Variables' that sets all the variables used. Eventually, I will move this into a settings page. There is a read me that describes variable usage. 
+There is a node named 'Variables' that sets all the variables used. Eventually, I will move some of this into a settings page. 
 
 ```This sets all variables that would otherwise be 
 hard-coded into global/flow for use.
@@ -116,6 +119,8 @@ lock_node_id - the node_id of the door lock in question
 code_length - a number between 4 and whatever that corresponds to the length of the code.
 **For Schlage, all codes have to be the same length.**
 NOTE: This does not change the lock settings, only specifies what's accepted in the form.
+
+max_supported_slots - the number of slots the lock supports.
 
 slot_offset - if there are slots that should never be touched, say slots 1-3, then enter a slot_offset
 value of 3. Default is 0.
@@ -157,6 +162,7 @@ log_scheduled_changes - logs activities based on schedule. Also, logs one-time c
 
 keep_log_days - number of days to keep log data. Older data is removed.
 ```
+
 ## Security
 Given that this tool manages locks which gain access to one's home, security is important. I stronly recommend using all of the built in security features. There are two additional security features that can be enabled through the settings.
   - use_encrytion - Encrypts data in the LockUsers table so if someone gains access to your database they won't be able to see users and codes.
