@@ -10,7 +10,7 @@
         "node-red-contrib-credentials": "~0.2.1",
         "node-red-contrib-home-assistant-websocket": "~0.14.0",
         "node-red-contrib-mongodb3": "~2.0.1",
-        "node-red-dashboard": "~2.15.5",
+        "node-red-dashboard": "~2.26.2",
         "node-red-node-ui_list": "~0.1.5"
     }
 }
